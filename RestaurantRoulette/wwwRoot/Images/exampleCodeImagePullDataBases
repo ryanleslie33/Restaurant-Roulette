@@ -1,0 +1,43 @@
+public static Byte[] ReadImage(int imageID)
+      {
+          SqlConnection connection = null;
+          try
+          {
+              connection = GetConnection();
+              connection.Open();
+
+              SqlCommand command = new SqlCommand();
+              command.Connection = connection;
+              command.CommandText =
+                  "SELECT ProductImage " +
+                  "FROM ProductImages " +
+                  "WHERE ImageID = @ImageID";
+
+              SqlParameter imageIDParam = new SqlParameter();
+              imageIDParam.ParameterName = "@ImageID";
+              imageIDParam.Value = imageID;
+
+              command.Parameters.Add(imageIDParam);
+              SqlDataReader reader = command.ExecuteReader();
+
+              Byte[] imageByteArray = null;
+              if (reader.Read() == false)
+              {
+                  throw new Exception(
+                      "Unable to read image.");
+              }
+              imageByteArray = (Byte[]) reader[0];
+              reader.Close();
+
+              return imageByteArray;
+          }
+          catch (Exception e)
+          {
+              throw e;
+          }
+          finally
+          {
+              if (connection != null)
+                  connection.Close();
+          }
+      }

@@ -1,0 +1,47 @@
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.image1 {
+  width: 25%;
+  height: auto;
+    -webkit-animation-name:            rotate;
+    -webkit-animation-duration:        3.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+@keyframes circle {
+    from {-webkit-transform: rotateZ(0deg)}
+    to {-webkit-transform: rotateZ(360deg)}
+}
+.image2{
+  width: 3%;
+  height: auto;
+    -webkit-animation-name:            rotate;
+    -webkit-animation-duration:        2.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+
+}
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.image1 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.image2 {
+  position: absolute;
+  top: 30px;
+  left: 70px;
+}
