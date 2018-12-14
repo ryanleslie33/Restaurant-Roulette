@@ -15,33 +15,20 @@
 
  @foreach(User user in Model)
  {
-   <ul>
+  <ul>
 <li>@User.GetName()</li>
 
 <li>@User.GetDistance()</li>
 
 <li>@User.GetPrice()</li>
-   </ul>
-
-
-
+  </ul>
  }
 
 
 
-
-
-
-
-
-@* will go back to the home view splash page *@
-<form class="" action="/" method="post">
-  <button type="submit" name="button">discard and try again</button>
-</form>
-
-<form class="" action="/User/@User.GetId()/Restaurant/@Restaurant.GetId()" method="post">
-  <button type="submit" name="button">GO</button>
-</form>
+<p><a href='/user/@Model["user"].GetId()/edit'>Edit Profile</a></p>
+<br>
+<p><a href='/favorite'>View Favorites</a></p>
 
 
 </body>

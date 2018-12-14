@@ -46,5 +46,15 @@ namespace User.Controllers
       return View(model);
     }
 
+    [HttpGet("/user/{id}/edit")]
+    public ActionResult Edit(int id)
+    {
+      User user = User.Find(id);
+
+      return View(user);
+    }
+
+    
+
   }
 }
