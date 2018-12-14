@@ -161,6 +161,41 @@ namespace RestaurantRoulette.Models
       return allFavorites;
     }
 
+
+
+    public static List<Favorite> GetByDistance()
+    {
+      List<Favorite> resByDistance = new List<Favorite> { };
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM restaurant_data;";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int favoriteId = rdr.GetInt32(0);
+        string favoriteName = rdr.GetString(1);
+        string favoriteAddress = rdr.GetInt32(2);
+        float favoriteLatitude = rdr.GetFloat(3);
+        float favoriteLongitude = rdr.GetFloat(4);
+        int favoriteCost = rdr.GetInt32(5);
+        string favoriteCusine = rdr.GetString(6);
+        string favoriteMenuUrl = rdr.GetString(7);
+        string favoritePageUrl = rdr.GetString(8);
+        //favoriteImage = rdr.GetBlob(9)
+        //Image favoriteImage = rdr.
+        Favorite newFavorite = new Favorite(favoriteId, favoriteName, favoriteAddress, favoriteLatitude, favoriteLongitude, favoriteCost, favoriteCusine, favoriteMenuUrl, favoritePageUrl);
+        allFavorites.Add(newFavorite);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allFavorites;
+
+    }
+
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
