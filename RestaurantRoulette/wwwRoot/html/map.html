@@ -40,6 +40,9 @@
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
+            var lattitude = pos.lat;
+            var longitude = pos.lng;
+            console.log(lattitude);
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
