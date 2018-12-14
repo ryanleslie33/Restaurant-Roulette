@@ -11,6 +11,11 @@ namespace RestaurantRoulette.Models
     private int _id;
     private int _distance;
     private int _price;
+    private string _password;
+    private Byte[];
+    private string _bio;
+    private float _lat;
+    private float _long;
     private List<Restaurant> _favorites;
 
     public User(string name, int distance, int price, int id = 0)
@@ -19,6 +24,7 @@ namespace RestaurantRoulette.Models
       _id = id;
       _distance = distance;
       _price = price;
+      _password = password;
       _favorites = new List<Restaurant>{};
     }
 

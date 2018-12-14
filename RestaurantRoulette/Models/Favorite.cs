@@ -18,7 +18,7 @@ namespace RestaurantRoulette.Models
     private string _favoritePageUrl;
     //private Image _favoriteImage;
 
-    public Favorite(int favId, string favName, string favAddress, float favLatitude, float favLongitude, int favCost, string favCusine, string favMenuUrl, string favPageUrl)
+    public Favorite(string favName, string favAddress, string favMenuUrl, string favPageUrl, int favId = 0, float favLatitude = 0, float favLongitude = 0, int favCost = 0, string favCusine = "")
     {
       _favoriteResId = favId;
       _favoriteResName = favName;
@@ -150,7 +150,7 @@ namespace RestaurantRoulette.Models
         string favoritePageUrl = rdr.GetString(8);
         //favoriteImage = rdr.GetBlob(9)
         //Image favoriteImage = rdr.
-        Favorite newFavorite = new Favorite(favoriteId, favoriteName, favoriteAddress, favoriteLatitude, favoriteLongitude, favoriteCost, favoriteCusine, favoriteMenuUrl, favoritePageUrl);
+        Favorite newFavorite = new Favorite( favoriteName, favoriteAddress, favoriteLatitude, favoriteLongitude, favoriteCost, favoriteCusine, favoriteMenuUrl, favoritePageUrl, favoriteId = 0);
         allFavorites.Add(newFavorite);
       }
       conn.Close();
@@ -162,6 +162,105 @@ namespace RestaurantRoulette.Models
     }
 
     public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO favorites (fav_res_name, fav_address, fav_lat, fav_long, fav_cost_for_2, fav_cusine, fav_menu_url, fav_page_url) VALUES (@favoriteRestaurantName, @favoriteAddress, @favoriteLatitude, @favoriteLongitude, @favoriteCostFor2, @favoriteCusine, @favoriteMenuUrl, @favoritePageUrl);";
+
+
+      MySqlParameter rollResult = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@rollresult", result);
+
+      MySqlParameter description = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@ItemDescription", this._description);
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
+
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      //To fail Saves to database method - declare method and keep it empty
+      //To fail Save AssignsId test -
+      //do not add the "_id = (int) cmd.LastInsertedId;" line
+    }
+
+
+    public int DiceRoll()
+    {
+      int result;
+      Random rnd = new Random();
+      result = rnd.Next(1,7);
+      return result;
+    }
+
+    public List<Client> GetFavRollResult()
+    {
+      List<Favorite> favRestaurantList = new List<Favorite> { };
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      Favorite newFavorite = new Favorite();
+      int id = cmd.LastInsertedId();
+
+      int result;
+      Random rnd = new Random();
+      result = rnd.Next(1, id+1);
+
+      cmd.CommandText = @"SELECT * FROM favorites WHERE fav_res_id = @rollresult;";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        MySqlParameter rollResult = new MySqlParameter();
+        cmd.Parameters.AddWithValue("@rollresult", result);
+        // rollResult.ParameterName = "@rollresult";
+        // rollesult.Value = result;
+        //cmd.Parameters.Add(rollresult);
+        MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+        int favId;
+        string favRestaurantName = "";
+        string favRestaurantAddress = "";
+        //float favLatitude ;
+        //float favLongitude;
+        //int favCost;
+        //string favCusine;
+        string favUrl = "";
+        string favMenuUrl = "";
+        while (rdr.Read())
+        {
+          favId = rdr.GetInt32(0);
+          favRestaurantName = rdr.GetString(1);
+          favRestaurantAddress = rdr.GetString(2);
+          //favLatitude = rdr.GetFloat(3);
+          //favLongitude = rdr.GetFloat(4);
+          //favCost = rdr.GetInt32(5);
+          //favCusine = rdr.GetString(6);
+          favUrl = rdr.GetString(8);
+          favMenuUrl = rdr.GetString(7);
+        }
+        Favorite newFavorite = new Favorite(favRestaurantName, favRestaurantAddress, favMenuUrl, favUrl);
+        favRestaurantList.Add(newFavorite);
+      }
+      conn.close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return favRestaurantList;
+    }
+
+    public void Retrieve()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT fav_res_name, fav_address, fav_lat, fav_long, fav_cusine, fav_menu_url, fav_page_url FROM restaurant_data WHERE "
+    }
+
+    public void Insert()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
