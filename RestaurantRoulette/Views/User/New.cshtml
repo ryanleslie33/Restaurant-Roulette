@@ -8,9 +8,21 @@
   <script src="js/scripts.js"></script>
   <link rel="stylesheet" type="text/css" href="~/css/styles.css" />
   <meta charset="utf-8">
-  <title></title>
+  <title>New User Registration Form</title>
 </head>
 <body>
+
+<form action="/user" method="post">
+
+  <label for="userName">User Name:</label>
+  <input type="text" name="userName" id="userName">
+  <br>
+  <label for="userPassword">User Password:</label>
+  <input type="text" name="userPassword" id="userPassword">
+  <br>
+  <button type="submit">Add</button>
+
+</form>
 
 </body>
 </html>
