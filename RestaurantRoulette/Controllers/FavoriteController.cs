@@ -3,9 +3,9 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Dice.Models;
 
-namespace Restaurant.Controllers
+namespace RestaurantRoulette.Controllers
 {
-  public class RestaurantController : Controller
+  public class RestaurantRouletteController : Controller
   {
 
   }
