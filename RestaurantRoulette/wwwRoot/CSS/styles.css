@@ -1,4 +1,54 @@
 
+.container {
+  background-color:n
+}
+.topPhoto {
+  display: block;
+  margin-top: 75px;
+  margin-left: 150px;
+  /* margin-right: 100px; */
+  width: 175%;
+}
+
+.wheel {
+  display: block;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250%;
+}
+
+body {
+  background: radial-gradient( circle, transparent 50%, black 150%), #146E20;
+  height: 180px;
+}
+
+.buttons {
+ color: black;
+ position:absolute;
+ width: 180px;
+ height: 80px;
+ margin-left: 25px;
+ bottom:25px;
+}
+
+.logo {
+  display: center;
+  margin-top: 45px;
+  margin-left: 200px;
+  width: 25%;
+}
+
+.goButtons {
+   color: black;
+   position:absolute;
+   /* width: 180px;
+   height: 80px; */
+   margin-left: 25px;
+   bottom:25px;
+}
+
+
 @-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0deg);
