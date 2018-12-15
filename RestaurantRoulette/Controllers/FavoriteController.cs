@@ -7,6 +7,12 @@ namespace RestaurantRoulette.Controllers
 {
   public class RestaurantRouletteController : Controller
   {
+    [httpGet("/favorite")]
+    public ActionResult Index()
+    {
+      List<Restaurant> favorites = User.GetFavorites();
 
+      return View(favorites);
+    }
   }
 }
