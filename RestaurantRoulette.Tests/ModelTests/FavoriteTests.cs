@@ -12,12 +12,18 @@ namespace Dice.Tests
 
     public void Dispose()
     {
-      // User.ClearAll();
+      Favorite.ClearAll();
     }
 
     public RestuarantTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=Dice_Tests;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=RestaurantRoulette_Tests;";
+    }
+
+    public void GetFavRollResult_selectsARestaurantFromFavorites_Favorite
+    {
+      //Arrange
+      Favorite newFavorite = new Favorite("Pok Pok", )
     }
   }
 }
