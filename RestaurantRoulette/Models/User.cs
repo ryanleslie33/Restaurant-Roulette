@@ -8,32 +8,25 @@ namespace RestaurantRoulette.Models
   {
 
     private string _name;
-    private int _id;
     private int _distance;
     private int _price;
-    private string _password;
-<<<<<<< HEAD
-    //private byte[];
     private string _bio;
-    private float _lat;
-    private float _long;
-    //private List<Restaurant> _favorites;
-=======
-    // private Byte[];
-    private string _bio;
-    // private float _lat;
+    private int _id;
+    private List<Favorite> _favorites;
+    // private float _lat; //hardcoded for now
     // private float _long;
-    private List<Restaurant> _favorites;
->>>>>>> master
+    // private string _password; // will add when login logic is sorted out
 
-    public User(string name, int distance, int price, int id = 0)
+
+    public User(string name, int distance, int price, string bio, int id = 0)
     {
       _name = name;
-      _id = id;
       _distance = distance;
       _price = price;
-      _password = password;
-      //_favorites = new List<Restaurant>{};
+      _bio = bio;
+      _id = id;
+      _favorites = new List<Favorite>{};
+      // _password = password;
     }
 
     public string GetName()
@@ -41,10 +34,6 @@ namespace RestaurantRoulette.Models
       return _name;
     }
 
-    public int GetId()
-    {
-      return _id;
-    }
 
     public int GetDistance()
     {
@@ -56,11 +45,15 @@ namespace RestaurantRoulette.Models
       return _price;
     }
 
-    public int GetBio()
+    public string GetBio()
     {
       return _bio;
     }
 
+    public int GetUserId()
+    {
+      return _id;
+    }
 
     public override bool Equals(System.Object otherUser)
     {
@@ -71,11 +64,12 @@ namespace RestaurantRoulette.Models
       else
       {
         User newUser = (User)otherUser;
-        bool idEquality = this.GetId().Equals(newUser.GetId());
+        bool idEquality = this.GetUserId().Equals(newUser.GetUserId());
         bool nameEquality = this.GetName().Equals(newUser.GetName());
         bool distanceEquality = this.GetDistance().Equals(newUser.GetDistance());
         bool priceEquality = this.GetPrice().Equals(newUser.GetPrice());
-        return (idEquality && nameEquality && distanceEquality && priceEquality);
+        bool bioEquality = this.GetBio().Equals(newUser.GetBio());
+        return (idEquality && nameEquality && distanceEquality && priceEquality && bioEquality);
       }
     }
 
@@ -92,27 +86,27 @@ namespace RestaurantRoulette.Models
         conn.Dispose();
       }
     }
-
+    //Method will save new user into database. However need to verify the new user form view. We have a different view for the user info edit but nothing for a new user.
+    //One thought is to just create and save a user with only name property. Then have user change their details on the edit page.
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO users (name, distance, price) VALUES (@name, @distance, @price);";
+      cmd.CommandText = @"INSERT INTO users (name, distance, price, bio) VALUES (@name, @distance, @price, @bio);";
       MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@name";
-      name.Value = this._name;
-      cmd.Parameters.Add(name);
+      cmd.Parameters.AddWithValue("@name", this._name);
       MySqlParameter distance = new MySqlParameter();
-      distance.ParameterName = "@distance";
-      distance.Value = this._distance;
-      cmd.Parameters.Add(distance);
+      cmd.Parameters.AddWithValue("@distance", this._distance);
       MySqlParameter price = new MySqlParameter();
-      price.ParameterName = "@price";
-      price.Value = this._price;
-      cmd.Parameters.Add(price);
+      cmd.Parameters.AddWithValue("@price", this._price);
+      MySqlParameter bio = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@bio", this._bio);
       cmd.ExecuteNonQuery();
+
       _id = (int) cmd.LastInsertedId;
+      Console.WriteLine(_id);
+
       conn.Close();
       if (conn != null)
       {
@@ -120,33 +114,7 @@ namespace RestaurantRoulette.Models
       }
     }
 
-    public static List<User> GetAll()
-    {
-      List<User> allUsers = new List<User> {};
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM users;";
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        int userId = rdr.GetInt32(0);
-        string userName = rdr.GetString(1);
-        int userDistance = rdr.GetInt32(2);
-        int userPrice = rdr.GetInt32(3);
-        string userBio = rdr.GetString(4);
-        // Byte[] userImageByteArray = rdr.Read(5)(Byte[]) rdr[0];
-        User newUser = new User(userName, userDistance, userPrice, userImage, userBio, userId);
-        allUsers.Add(newUser);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return allUsers;
-    }
-
+    //check if Edit requires a name edit or not; It should ideally edit only price, distance and the bio. We can skip name property edit in this project to keep things simpler.
     public void Edit(string newName, int newDistance, int newPrice, string newBio)
     {
       MySqlConnection conn = DB.Connection();
@@ -177,22 +145,22 @@ namespace RestaurantRoulette.Models
       }
     }
 
+    //Find method is need to complete Edit. After Editing the user info, find will retriev it from the database
     public static User Find(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM User WHERE id = (@searchId);";
+      cmd.CommandText = @"SELECT * FROM users WHERE id = (@searchId);";
       MySqlParameter searchId = new MySqlParameter();
-      searchId.ParameterName = "@searchId";
-      searchId.Value = id;
-      cmd.Parameters.Add(searchId);
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      cmd.Parameters.AddWithValue("@searchId", id);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
       int userId = 0;
       string userName = "";
       int userPrice = 0;
       int userDistance = 0;
+      string userBio = "";
 
       while(rdr.Read())
       {
@@ -200,9 +168,10 @@ namespace RestaurantRoulette.Models
         userName = rdr.GetString(1);
         userDistance = rdr.GetInt32(2);
         userPrice = rdr.GetInt32(3);
+        userBio = rdr.GetString(4);
       }
 
-      User newUser = new User(userName, userDistance, userPrice, userId);
+      User foundUser = new User(userName, userDistance, userPrice, userBio, userId);
 
       conn.Close();
 
@@ -210,8 +179,38 @@ namespace RestaurantRoulette.Models
       {
         conn.Dispose();
       }
-      return newUser;
+      return foundUser;
     }
-
   }
 }
+//
+//     public static List<User> GetAll()
+//     {
+//       List<User> allUsers = new List<User> {};
+//       MySqlConnection conn = DB.Connection();
+//       conn.Open();
+//       var cmd = conn.CreateCommand() as MySqlCommand;
+//       cmd.CommandText = @"SELECT * FROM users;";
+//       var rdr = cmd.ExecuteReader() as MySqlDataReader;
+//       while(rdr.Read())
+//       {
+//         int userId = rdr.GetInt32(0);
+//         string userName = rdr.GetString(1);
+//         int userDistance = rdr.GetInt32(2);
+//         int userPrice = rdr.GetInt32(3);
+//         string userBio = rdr.GetString(4);
+//         // Byte[] userImageByteArray = rdr.Read(5)(Byte[]) rdr[0];
+//         User newUser = new User(userName, userDistance, userPrice, userImage, userBio, userId);
+//         allUsers.Add(newUser);
+//       }
+//       conn.Close();
+//       if (conn != null)
+//       {
+//         conn.Dispose();
+//       }
+//       return allUsers;
+//     }
+//
+//
+//   }
+// }
