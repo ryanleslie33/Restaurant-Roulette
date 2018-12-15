@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Dice
+namespace RestaurantRoulette
 {
   public class Program
   {

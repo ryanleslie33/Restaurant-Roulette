@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
-using System.Drawing;
+//using System.Drawing;
 
 namespace RestaurantRoulette.Models
 {
@@ -105,7 +105,6 @@ namespace RestaurantRoulette.Models
         bool cusineEquality = (this.GetFavCusine() == newFavorite.GetFavCusine());
         bool menuUrlEquality = (this.GetMenuUrl() == newFavorite.GetMenuUrl());
         bool pageUrlEquality = (this.GetPageUrl() == newFavorite.GetPageUrl());
-        //bool imageEquality = (this.GetImage() == newFavorite.GetImage());
         return (idEquality && nameEquality && addressEquality && latitudeEquality && longitudeEquality && costEquality && cusineEquality && menuUrlEquality && pageUrlEquality);
       }
     }
@@ -193,7 +192,6 @@ namespace RestaurantRoulette.Models
         conn.Dispose();
       }
       return allFavorites;
-
     }
 
     public void Save()
@@ -203,36 +201,50 @@ namespace RestaurantRoulette.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO favorites (fav_res_name, fav_address, fav_lat, fav_long, fav_cost_for_2, fav_cusine, fav_menu_url, fav_page_url) VALUES (@favoriteRestaurantName, @favoriteAddress, @favoriteLatitude, @favoriteLongitude, @favoriteCostFor2, @favoriteCusine, @favoriteMenuUrl, @favoritePageUrl);";
 
+      MySqlParameter favRName = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteRestaurantName", this._favoriteResName);
 
-      MySqlParameter rollResult = new MySqlParameter();
-      cmd.Parameters.AddWithValue("@rollresult", result);
 
-      MySqlParameter description = new MySqlParameter();
-      cmd.Parameters.AddWithValue("@ItemDescription", this._description);
+      MySqlParameter favRAddress = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteAddress", this._favoriteResAddress);
+
+      MySqlParameter favRLatitude = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteLatitude", this._favoriteLat);
+
+      MySqlParameter favRLongitude = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteLongitude", this._favoriteLong);
+
+      MySqlParameter favRCost = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteCostFor2", this._favoriteCost);
+
+      MySqlParameter favRCusine = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteCusine", this._favoriteCusine);
+
+      MySqlParameter favRMenuUrl = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoriteMenuUrl", this._favoriteMenuUrl);
+
+      MySqlParameter favRPageUrl = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@favoritePageUrl", this._favoritePageUrl);
+
       cmd.ExecuteNonQuery();
-      _id = (int) cmd.LastInsertedId;
-
+      _favoriteResId = (int) cmd.LastInsertedId;
 
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      //To fail Saves to database method - declare method and keep it empty
-      //To fail Save AssignsId test -
-      //do not add the "_id = (int) cmd.LastInsertedId;" line
     }
 
+    // public int DiceRoll()
+    // {
+    //   int result;
+    //   Random rnd = new Random();
+    //   result = rnd.Next(1,7);
+    //   return result;
+    // }
 
-    public int DiceRoll()
-    {
-      int result;
-      Random rnd = new Random();
-      result = rnd.Next(1,7);
-      return result;
-    }
-
-    public List<Client> GetFavRollResult()
+    public List<Favorite> GetFavRollResult()
     {
       List<Favorite> favRestaurantList = new List<Favorite> { };
       MySqlConnection conn = DB.Connection();
@@ -279,7 +291,7 @@ namespace RestaurantRoulette.Models
         Favorite newFavorite = new Favorite(favRestaurantName, favRestaurantAddress, favMenuUrl, favUrl);
         favRestaurantList.Add(newFavorite);
       }
-      conn.close();
+      conn.Close();
       if(conn != null)
       {
         conn.Dispose();
@@ -287,48 +299,48 @@ namespace RestaurantRoulette.Models
       return favRestaurantList;
     }
 
-    public void Retrieve()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT fav_res_name, fav_address, fav_lat, fav_long, fav_cusine, fav_menu_url, fav_page_url FROM restaurant_data WHERE "
-    }
+    // public void Retrieve()
+    // {
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT fav_res_name, fav_address, fav_lat, fav_long, fav_cusine, fav_menu_url, fav_page_url FROM restaurant_data WHERE "
+    // }
 
-    public void Insert()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO favorites (favoriteId, favoriteName, favoriteAddress, favoriteLatitude, favoriteLongitude, favoriteCost, favoriteCusine, favoriteMenuUrl, favoritePageUrl) VALUES (@Id, @name, @address, @latitude, @longitude, @cost, @cusine, @menuUrl, @pageUrl);";
-      MySqlParameter fav_id = new MySqlParameter();
-      MySqlParameter fav_name = new MySqlParameter();
-      MySqlParameter fav_address = new MySqlParameter();
-      MySqlParameter fav_latitude = new MySqlParameter();
-      MySqlParameter fav_longitude = new MySqlParameter();
-      MySqlParameter fav_cost = new MySqlParameter();
-      MySqlParameter fav_cusine = new MySqlParameter();
-      MySqlParameter fav_menu_url = new MySqlParameter();
-      MySqlParameter fav_page_url = new MySqlParameter();
-
-      //cmd.Parameters.AddWithValue("@Id", this._favoriteResId);
-      cmd.Parameters.AddWithValue("@name", this._favoriteResName);
-      cmd.Parameters.AddWithValue("@address", _favoriteAddress);
-      cmd.Parameters.AddWithValue("@latitude", this._favoriteLat);
-      cmd.Parameters.AddWithValue("@longitude", this._favoriteLong);
-      cmd.Parameters.AddWithValue("@cost", this._favoriteCost);
-      cmd.Parameters.AddWithValue("@cusine", this._favoriteCusine);
-      cmd.Parameters.AddWithValue("@menuUrl", this._favoriteMenuUrl);
-      cmd.Parameters.AddWithValue("@pageUrl", this._favoritePageUrl);
-
-      cmd.ExecuteNonQuery();
-      _id = (int) cmd.LastInsertedId;
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
+    // public void Insert()
+    // {
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"INSERT INTO favorites (favoriteId, favoriteName, favoriteAddress, favoriteLatitude, favoriteLongitude, favoriteCost, favoriteCusine, favoriteMenuUrl, favoritePageUrl) VALUES (@Id, @name, @address, @latitude, @longitude, @cost, @cusine, @menuUrl, @pageUrl);";
+    //   MySqlParameter fav_id = new MySqlParameter();
+    //   MySqlParameter fav_name = new MySqlParameter();
+    //   MySqlParameter fav_address = new MySqlParameter();
+    //   MySqlParameter fav_latitude = new MySqlParameter();
+    //   MySqlParameter fav_longitude = new MySqlParameter();
+    //   MySqlParameter fav_cost = new MySqlParameter();
+    //   MySqlParameter fav_cusine = new MySqlParameter();
+    //   MySqlParameter fav_menu_url = new MySqlParameter();
+    //   MySqlParameter fav_page_url = new MySqlParameter();
+    //
+    //   //cmd.Parameters.AddWithValue("@Id", this._favoriteResId);
+    //   cmd.Parameters.AddWithValue("@name", this._favoriteResName);
+    //   cmd.Parameters.AddWithValue("@address", _favoriteAddress);
+    //   cmd.Parameters.AddWithValue("@latitude", this._favoriteLat);
+    //   cmd.Parameters.AddWithValue("@longitude", this._favoriteLong);
+    //   cmd.Parameters.AddWithValue("@cost", this._favoriteCost);
+    //   cmd.Parameters.AddWithValue("@cusine", this._favoriteCusine);
+    //   cmd.Parameters.AddWithValue("@menuUrl", this._favoriteMenuUrl);
+    //   cmd.Parameters.AddWithValue("@pageUrl", this._favoritePageUrl);
+    //
+    //   cmd.ExecuteNonQuery();
+    //   _id = (int) cmd.LastInsertedId;
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    // }
 
     // public void Edit(string newName)
     // {
