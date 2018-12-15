@@ -12,11 +12,19 @@ namespace RestaurantRoulette.Models
     private int _distance;
     private int _price;
     private string _password;
+<<<<<<< HEAD
     //private byte[];
     private string _bio;
     private float _lat;
     private float _long;
     //private List<Restaurant> _favorites;
+=======
+    // private Byte[];
+    private string _bio;
+    // private float _lat;
+    // private float _long;
+    private List<Restaurant> _favorites;
+>>>>>>> master
 
     public User(string name, int distance, int price, int id = 0)
     {
@@ -38,15 +46,21 @@ namespace RestaurantRoulette.Models
       return _id;
     }
 
+    public int GetDistance()
+    {
+      return _distance;
+    }
+
     public int GetPrice()
     {
       return _price;
     }
 
-    public int GetDistance()
+    public int GetBio()
     {
-      return _distance;
+      return _bio;
     }
+
 
     public override bool Equals(System.Object otherUser)
     {
@@ -70,7 +84,7 @@ namespace RestaurantRoulette.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM User; DELETE FROM User_Restaurants;";
+      cmd.CommandText = @"DELETE FROM users; DELETE FROM users_favorites; DELETE FROM favorites";
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -84,7 +98,7 @@ namespace RestaurantRoulette.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO User (name, distance, price) VALUES (@name, @distance, @price);";
+      cmd.CommandText = @"INSERT INTO users (name, distance, price) VALUES (@name, @distance, @price);";
       MySqlParameter name = new MySqlParameter();
       name.ParameterName = "@name";
       name.Value = this._name;
@@ -112,15 +126,17 @@ namespace RestaurantRoulette.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM User;";
+      cmd.CommandText = @"SELECT * FROM users;";
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int UserId = rdr.GetInt32(0);
-        string UserName = rdr.GetString(1);
-        int UserDistance = rdr.GetInt32(2);
-        int UserPrice = rdr.GetInt32(3);
-        User newUser = new User(UserName, UserDistance, UserPrice, UserId);
+        int userId = rdr.GetInt32(0);
+        string userName = rdr.GetString(1);
+        int userDistance = rdr.GetInt32(2);
+        int userPrice = rdr.GetInt32(3);
+        string userBio = rdr.GetString(4);
+        // Byte[] userImageByteArray = rdr.Read(5)(Byte[]) rdr[0];
+        User newUser = new User(userName, userDistance, userPrice, userImage, userBio, userId);
         allUsers.Add(newUser);
       }
       conn.Close();
@@ -131,32 +147,28 @@ namespace RestaurantRoulette.Models
       return allUsers;
     }
 
-    public void Edit(string newName, int newDistance, int newPrice)
+    public void Edit(string newName, int newDistance, int newPrice, string newBio)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE User SET name = @newName WHERE id = @searchId; UPDATE User SET distance = @newDistance WHERE id = @searchId; UPDATE User SET price = @newPrice WHERE id = @searchId;";
+      cmd.CommandText = @"UPDATE users SET name = @newName, distance = @newDistance, price = @newPrice, bio = @newBio WHERE id = @searchId;";
       MySqlParameter searchId = new MySqlParameter();
-      searchId.ParameterName = "@searchId";
-      searchId.Value = _id;
-      cmd.Parameters.Add(searchId);
+      cmd.Parameters.AddWithValue("@searchId", this._id);
       MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@newName";
-      name.Value = newName;
-      cmd.Parameters.Add(name);
+      cmd.Parameters.AddWithValue("@newName", newName);
       MySqlParameter distance = new MySqlParameter();
-      distance.ParameterName = "@newDistance";
-      distance.Value = newDistance;
-      cmd.Parameters.Add(distance);
+      cmd.Parameters.AddWithValue("@newDistance", newDistance);
       MySqlParameter price = new MySqlParameter();
-      price.ParameterName = "@newPrice";
-      price.Value = newPrice;
-      cmd.Parameters.Add(price);
+      cmd.Parameters.AddWithValue("@newPrice", newPrice);
+      MySqlParameter bio = new MySqlParameter();
+      cmd.Parameters.AddWithValue("@newBio", newBio);
+
       cmd.ExecuteNonQuery();
       _name = newName;
       _distance = newDistance;
       _price = newPrice;
+      _bio = newBio;
 
       conn.Close();
       if (conn != null)

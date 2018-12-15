@@ -12,3 +12,14 @@ namespace Dice.Tests
 
   }
 }
+
+
+private string _name;
+private int _id;
+private int _distance;
+private int _price;
+private string _password;
+private Byte[];
+private string _bio;
+
+private List<Restaurant> _favorites;
