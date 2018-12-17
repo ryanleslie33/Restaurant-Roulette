@@ -338,7 +338,11 @@ namespace RestaurantRoulette.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       //user location set to Epicodus for demo purposes - (long -122.677, lat 45.521)
 
-      cmd.CommandText = @"SELECT * FROM restaurant_data WHERE (ST_DISTANCE_SPHERE(POINT(restaurant_location_longitude, restaurant_location_latitude), POINT(-122.677, 45.521)) * .000621371) < @selectDistance AND restaurant_average_cost_for_two <= @selectCost;";
+      //   cmd.CommandText = @"SELECT * FROM restaurant_data WHERE (ST_DISTANCE_SPHERE(POINT(restaurant_location_longitude, restaurant_location_latitude), POINT(-122.677, 45.521)) * .000621371) < @selectDistance AND restaurant_average_cost_for_two <= @selectCost;";
+      //Above Query does not work with epicodus computers; needs phpMyAdmin 5.7
+
+      //Below is Haversine formula for computing the distance output between 2 ssts of lat and long
+      cmd.CommandText = @"SELECT * FROM restaurant_data WHERE ( 3959 * acos( cos( radians( 45.521 ) ) * cos( radians( restaurant_location_latitude ) ) * cos( radians( restaurant_location_longitude ) - radians( -122.677 ) ) + sin( radians( 45.521 ) ) * sin( radians( restaurant_location_latitude ) ) ) ) < @selectDistance AND restaurant_average_cost_for_two <= @selectCost;";
 
       MySqlParameter userSelectDist = new MySqlParameter();
       cmd.Parameters.AddWithValue("@selectDistance", this._distance);
@@ -378,13 +382,13 @@ namespace RestaurantRoulette.Models
         conn.Dispose();
       }
 
-      //logic to roll dice to get a random restaurant from selected restaurants based on distance and price
-      // int selectedRestListIndex = RestFromAllRestWithinUserRange.Count;
-      // int result;
-      // Random rnd = new Random();
-      // result = rnd.Next(0, selectedRestListIndex);
-      // return RestFromAllRestWithinUserRange(result);
-
+    //   //logic to roll dice to get a random restaurant from selected restaurants based on distance and price
+    //   // int selectedRestListIndex = RestFromAllRestWithinUserRange.Count;
+    //   // int result;
+    //   // Random rnd = new Random();
+    //   // result = rnd.Next(0, selectedRestListIndex);
+    //   // return RestFromAllRestWithinUserRange(result);
+    //
       return RestFromAllRestWithinUserRange;
       }
 

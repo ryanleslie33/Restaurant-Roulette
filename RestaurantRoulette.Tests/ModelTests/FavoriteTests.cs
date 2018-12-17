@@ -163,30 +163,14 @@ namespace RestaurantRoulette.Tests
     {
       //Arrange
       Favorite newFavorite1 = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
+      newFavorite1.Save();
 
       //Act
       List<Favorite> testList = new List<Favorite> {newFavorite1};
       List<Favorite> result = Favorite.GetAll();
-      int resultId = 0;
-      int testListId = 0;
-      Console.WriteLine(testList.GetType());
-      Console.WriteLine(result.GetType());
-      foreach(var favorite in result)
-      {
-        resultId = favorite.GetId();
-        Console.WriteLine(favorite.GetName());
-        Console.WriteLine((favorite.GetAddress()));
-      }
-      Console.WriteLine("---------------------------");
-      foreach(var favorite in testList)
-      {
-        testListId = favorite.GetId();
-        Console.WriteLine(favorite.GetName());
-        Console.WriteLine(favorite.GetAddress());
 
-      }
       //Assert
-      Assert.AreEqual(resultId, testListId);
+      CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
@@ -199,23 +183,9 @@ namespace RestaurantRoulette.Tests
       testFavorite.Save();
       List<Favorite> result = Favorite.GetAll();
       List<Favorite> testList = new List<Favorite>{testFavorite};
+
       //Assert
-      int resultId = 0;
-      int testListId = 0;
-      foreach(var favorite in result)
-      {
-        resultId = favorite.GetId();
-        Console.WriteLine(favorite.GetName());
-        Console.WriteLine((favorite.GetAddress()));
-      }
-      Console.WriteLine("---------------------------");
-      foreach(var favorite in testList)
-      {
-        testListId = favorite.GetId();
-        Console.WriteLine(favorite.GetName());
-        Console.WriteLine(favorite.GetAddress());
-      }
-      Assert.AreEqual(resultId, testListId);
+      CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
@@ -254,25 +224,7 @@ namespace RestaurantRoulette.Tests
       List<User> testList = new List<User>{testUser};
 
       //Assert
-      int resultId = 0;
-      int testListId = 0;
-      Console.WriteLine("---------------Add User--------");
-      foreach(var test in testList)
-      {
-        testListId = test.GetUserId();
-        Console.WriteLine(test.GetUserId());
-        Console.WriteLine(test.GetName());
-        Console.WriteLine((test.GetPassword()));
-      }
-      Console.WriteLine("---------------------------");
-      foreach(var resultUser in result)
-      {
-        resultId = resultUser.GetUserId();
-        Console.WriteLine(resultUser.GetUserId());
-        Console.WriteLine(resultUser.GetName());
-        Console.WriteLine((resultUser.GetPassword()));
-      }
-      Assert.AreEqual(testListId, resultId);
+      CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
@@ -292,28 +244,10 @@ namespace RestaurantRoulette.Tests
       testFavorite.AddUser(firstUser);
       List<User> result = testFavorite.GetUser();
       List<User> testList = new List<User>{firstUser};
-      //Assert
 
-      int resultId = 0;
-      int testListId = 0;
-      Console.WriteLine("---------------Add User--------");
-      foreach(var test in testList)
-      {
-        testListId = test.GetUserId();
-        Console.WriteLine(test.GetUserId());
-        Console.WriteLine(test.GetName());
-        Console.WriteLine((test.GetPassword()));
-      }
-      Console.WriteLine("---------------------------");
-      foreach(var resultUser in result)
-      {
-        resultId = resultUser.GetUserId();
-        Console.WriteLine(resultUser.GetUserId());
-        Console.WriteLine(resultUser.GetName());
-        Console.WriteLine((resultUser.GetPassword()));
-      }
-      Assert.AreEqual(testListId, resultId);
-      //CollectionAssert.AreEqual(testList, result); --- Ask Lina Why CollectionAssert is not working for List<User> and List<Favorite>
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result); 
     }
   }
 }
