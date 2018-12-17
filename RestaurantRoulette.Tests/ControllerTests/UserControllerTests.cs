@@ -1,25 +1,26 @@
-// using Microsoft.VisualStudio.TestTools.UnitTesting;
-// using Microsoft.AspNetCore.Mvc;
-// using System.Collections.Generic;
-// using Dice.Controllers;
-// using Dice.Models;
-//
-// namespace Dice.Tests
-// {
-//   [TestClass]
-//   public class UserControllerTest
-//   {
-//
-//   }
-// }
-//
-//
-// private string _name;
-// private int _id;
-// private int _distance;
-// private int _price;
-// private string _password;
-// private Byte[];
-// private string _bio;
-//
-// private List<Restaurant> _favorites;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using RestaurantRoulette.Controllers;
+using RestaurantRoulette.Models;
+
+namespace RestaurantRoulette.Tests
+{
+  [TestClass]
+  public class UserControllerTest
+  {
+    [TestMethod]
+    public void Index_ReturnsCorrectView_True()
+    {
+      //Arrange
+      UserController controller = new UserController();
+
+      //Act
+      ActionResult indexView = controller.Index();
+
+      //Assert
+      Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+    }
+
+  }
+}

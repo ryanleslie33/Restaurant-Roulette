@@ -15,28 +15,43 @@ namespace RestaurantRoulette.Controllers
     }
 
     //Offers Register for New User
-    [HttpGet("/users/new")]
+    [HttpGet("/user/new")]
     public ActionResult New()
     {
       return View();
     }
 
-    //Posts Login Details from existing User and returns that user's details from DB
-    [HttpPost("/users")]
-    public ActionResult Login(string userName, string userPass)
-    {
-      User foundUser = User.FindWithUserNameAndPassword(userName, userPass);
-      return View("Show", foundUser);
-    }
+    // Posts Login Details from existing User and returns that user's details from DB
+    // [HttpPost("/user/login")]
+    // public ActionResult Login(string userName, string userPass)
+    // {
+    //   User foundUser = User.FindWithUserNameAndPassword(userName, userPass);
+    //   RedirectToAction("Show", foundUser);
+    // }
 
     //Posts Registration Details for new User
-    [HttpPost("/users/login")]
-    public ActionResult Create(string userName, string userPass)
+    [HttpGet("/user")]
+    public ActionResult Create(string userName, string userPassword)
     {
-      User newUser = new User(userName, userPass);
+      User newUser = new User(userName, userPassword);
       newUser.Save();
       return View("Show", newUser);
     }
 
+    [HttpGet("/user")]
+    public ActionResult Show()
+    {
+      return View();
+    }
+
+
+    // [HttpPost("/user/edit")]
+    // public ActionResult Edit(int price, int distance)
+    // {
+    //   User newUser = new User(price,distance);
+    //   newUser.Edit();
+    //   newUser.Save();
+    //   RedirectToAction("Show", newUser);
+    // }
   }
 }
