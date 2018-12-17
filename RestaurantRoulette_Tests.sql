@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 14, 2018 at 12:04 AM
--- Server version: 5.6.38
--- PHP Version: 7.2.1
+-- Generation Time: Dec 17, 2018 at 07:58 AM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,16 +29,16 @@ USE `RestaurantRoulette_Tests`;
 --
 
 CREATE TABLE `favorites` (
-  `fav_res_id` int(11) NOT NULL,
-  `fav_res_name` varchar(39) NOT NULL,
-  `fav_address` varchar(46) NOT NULL,
-  `fav_lat` float NOT NULL,
-  `fav_long` float NOT NULL,
+  `id` int(11) NOT NULL,
+  `fav_res_name` varchar(255) NOT NULL,
+  `fav_address` varchar(255) NOT NULL,
+  `fav_lat` double NOT NULL,
+  `fav_long` double NOT NULL,
   `fav_cost_for_2` int(11) NOT NULL,
-  `fav_cuisine` varchar(32) NOT NULL,
-  `fav_menu_url` int(11) NOT NULL,
-  `fav_page_url` varchar(189) NOT NULL,
-  `fav_images` blob NOT NULL
+  `fav_cuisine` varchar(255) NOT NULL,
+  `fav_menu_url` varchar(255) NOT NULL,
+  `fav_page_url` varchar(255) NOT NULL,
+  `fav_images` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -99,8 +99,10 @@ INSERT INTO `restaurant_data` (`id`, `restaurant_name`, `restaurant_location_add
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `distance` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `distance` int(11) DEFAULT '0',
+  `price` int(11) DEFAULT '0',
+  `bio` varchar(255) DEFAULT '""'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -123,7 +125,7 @@ CREATE TABLE `users_favorites` (
 -- Indexes for table `favorites`
 --
 ALTER TABLE `favorites`
-  ADD PRIMARY KEY (`fav_res_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `restaurant_data`
@@ -151,7 +153,7 @@ ALTER TABLE `users_favorites`
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `fav_res_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `restaurant_data`
@@ -163,13 +165,13 @@ ALTER TABLE `restaurant_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `users_favorites`
 --
 ALTER TABLE `users_favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
