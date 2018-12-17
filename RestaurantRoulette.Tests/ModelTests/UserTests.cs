@@ -246,26 +246,7 @@ namespace RestaurantRoulette.Tests
       List<User> testFavoriteUsers = new List<User> {};
 
       //Assert
-      int resultId = 0;
-      int testListId = 0;
-      Console.WriteLine("---------------Add User--------");
-      foreach(var test in testFavoriteUsers)
-      {
-        testListId = test.GetUserId();
-        Console.WriteLine(test.GetUserId());
-        Console.WriteLine(test.GetName());
-        Console.WriteLine((test.GetPassword()));
-      }
-      Console.WriteLine("---------------------------");
-      foreach(var resultUser in resultFavoriteUsers)
-      {
-        resultId = resultUser.GetUserId();
-        Console.WriteLine(resultUser.GetUserId());
-        Console.WriteLine(resultUser.GetName());
-        Console.WriteLine((resultUser.GetPassword()));
-      }
-      Assert.AreEqual(testListId, resultId);
-      // CollectionAssert.AreEqual(testFavoriteUsers, resultFavoriteUsers);--- Ask Lina Why CollectionAssert is not working for List<User> and List<Favorite>
+      CollectionAssert.AreEqual(testFavoriteUsers, resultFavoriteUsers);
     }
 
     [TestMethod]
@@ -285,8 +266,10 @@ namespace RestaurantRoulette.Tests
       List<Favorite> result = testUser.AllRestaurantSortList();
       List<Favorite> testList = new List<Favorite>{testFavorite, testFavorite2};
 
+      Console.WriteLine("---------Sort List---------------");
+      Console.WriteLine(result.Count);
+      Console.WriteLine(testList.Count);
       //Assert
-
       Console.WriteLine(testList.GetType());
       Console.WriteLine(result.GetType());
       string resultName = "";
@@ -307,7 +290,7 @@ namespace RestaurantRoulette.Tests
 
       }
       Assert.AreEqual(resultName, testName);
-
+      // CollectionAssert.AreEqual(testList, result);
     }
   }
 }
