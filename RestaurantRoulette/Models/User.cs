@@ -36,6 +36,7 @@ namespace RestaurantRoulette.Models
     {
       return _password;
     }
+  
 
     public int GetDistance()
     {
