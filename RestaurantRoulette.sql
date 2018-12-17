@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 14, 2018 at 12:03 AM
--- Server version: 5.6.38
--- PHP Version: 7.2.1
+-- Generation Time: Dec 17, 2018 at 07:57 AM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,14 +30,14 @@ USE `RestaurantRoulette`;
 
 CREATE TABLE `favorites` (
   `fav_res_id` int(11) NOT NULL,
-  `fav_res_name` varchar(39) NOT NULL,
-  `fav_address` varchar(46) NOT NULL,
-  `fav_lat` float NOT NULL,
-  `fav_long` float NOT NULL,
+  `fav_res_name` varchar(255) NOT NULL,
+  `fav_address` varchar(255) NOT NULL,
+  `fav_lat` double NOT NULL,
+  `fav_long` double NOT NULL,
   `fav_cost_for_2` int(11) NOT NULL,
-  `fav_cuisine` varchar(32) NOT NULL,
-  `fav_menu_url` int(11) NOT NULL,
-  `fav_page_url` varchar(189) NOT NULL,
+  `fav_cuisine` varchar(255) NOT NULL,
+  `fav_menu_url` varchar(255) NOT NULL,
+  `fav_page_url` varchar(255) NOT NULL,
   `fav_images` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -99,8 +99,10 @@ INSERT INTO `restaurant_data` (`id`, `restaurant_name`, `restaurant_location_add
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `distance` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `distance` int(11) DEFAULT '0',
+  `price` int(11) DEFAULT '0',
+  `bio` varchar(255) DEFAULT '""'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

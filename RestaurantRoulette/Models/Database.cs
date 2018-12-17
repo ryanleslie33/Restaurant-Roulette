@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System;
-using Dice;
+using RestaurantRoulette;
 
-namespace Dice.Models
+namespace RestaurantRoulette.Models
 {
   public class DB
   {
