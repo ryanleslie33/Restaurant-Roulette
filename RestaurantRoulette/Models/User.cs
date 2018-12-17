@@ -65,7 +65,7 @@ namespace RestaurantRoulette.Models
       }
       else
       {
-        User newUser = (User)otherUser;
+        User newUser = (User) otherUser;
         bool idEquality = this.GetUserId().Equals(newUser.GetUserId());
         bool nameEquality = this.GetName().Equals(newUser.GetName());
         bool passwordEquality = this.GetPassword().Equals(newUser.GetPassword());
@@ -214,7 +214,7 @@ namespace RestaurantRoulette.Models
       return foundUser;
     }
 
-    public static User FindWithUserName(string loginName, string loginPassword)
+    public static User FindWithUserNameAndPassword(string loginName, string loginPassword)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -261,7 +261,7 @@ namespace RestaurantRoulette.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT favorites.* FROM users JOIN users_favorites ON (users.id = users_favorites.user_id) JOIN favorites ON (users_favorites.favorite_id = favorites.id) WHERE users.id = @UserId;";
+      cmd.CommandText = @"SELECT favorites.* FROM users JOIN users_favorites ON (users.id = users_favorites.user_id) JOIN favorites ON (users_favorites.restaurant_id = favorites.id) WHERE users.id = @UserId;";
       MySqlParameter userIdParameter = new MySqlParameter();
       cmd.Parameters.AddWithValue("@UserId", this._id);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
@@ -286,23 +286,26 @@ namespace RestaurantRoulette.Models
         conn.Dispose();
       }
       return allFavorites;
+
+      //logic to roll dice to get a random restaurant from selected restaurants based on distance and price
+      // int selectedRestListIndex = allFavorites.Count;
+      // int result;
+      // Random rnd = new Random();
+      // result = rnd.Next(0, selectedRestListIndex);
+      // return allFavorites(result);
     }
 
     public void AddFavoriteToUser(Favorite newFavorite)
     {
-      // System.Console.WriteLine("line 183: "+ newItem.GetId());
-      // System.Console.WriteLine("line 184: "+ _id);
-
       MySqlConnection conn = DB.Connection();
       conn.Open();
 
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO users_favorites (user_id, favorite_id) VALUES (@UserId, @FavoriteId);";
+      cmd.CommandText = @"INSERT INTO users_favorites (user_id, restaurant_id) VALUES (@UserId, @FavoriteId);";
       MySqlParameter user_id = new MySqlParameter();
       cmd.Parameters.AddWithValue("@UserId", _id);
       MySqlParameter favorite_id = new MySqlParameter();
       cmd.Parameters.AddWithValue("@FavoriteId", newFavorite.GetId());
-      // System.Console.WriteLine(cmd.CommandText);
       cmd.ExecuteNonQuery();
 
       conn.Close();

@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace RestaurantRoulette.Tests
 {
   [TestClass]
-  public class FavoriteTest : IDisposable //This should be FavoriteTest not RestuarantRouletteTest
+  public class FavoriteTest : IDisposable
 
   {
     public FavoriteTest()
-    //This should be FavoriteTest not RestuarantTest
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=RestaurantRoulette_Tests;";
     }
@@ -188,7 +187,7 @@ namespace RestaurantRoulette.Tests
       }
       //Assert
       Assert.AreEqual(resultId, testListId);
-  }
+    }
 
     [TestMethod]
     public void Save_SavesToDatabase_FavoriteList()
@@ -219,33 +218,102 @@ namespace RestaurantRoulette.Tests
       Assert.AreEqual(resultId, testListId);
     }
 
-    // [TestMethod]
-    // public void GetFavRollResult_ReturnsChosenFavorite_Favorite()
-    // {
-    //   Favorite firstFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", 45.5046, -122.632, 35, "Thai");
-    //   Favorite secondFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", 45.5046, -122.632, 35, "Thai");
-    //
-    //   firstFavorite.Save();
-    //   int firstId = firstFavorite.GetId();
-    //   secondFavorite.Save();
-    //   int secondId = secondFavorite.GetId();
-    //
-    //   Favorite resultFavRes = Favorite.GetFavRollResult();
-    //   Console.WriteLine(firstId);
-    //   Console.WriteLine(secondId);
-    //   Console.WriteLine(resultFavRes.GetId());
-    //
-    //   // bool firstFav = (firstId == resultFavRes.GetId());
-    //   // bool secondFav = (secondId == resultFavRes.GetId());
-    //   // return (firstFav || secondFav);
-    //   if(firstId == resultFavRes.GetId())
-    //   {
-    //     Assert.IsTrue(true);
-    //   }
-    //   else if(secondId == resultFavRes.GetId())
-    //   {
-    //     Assert.IsTrue(true);
-    //   }
-    // }
+    [TestMethod]
+    public void Delete_DeletesfavoriteAssociationsFromDatabase_ItemList()
+    {
+      //Arrange
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(2, 25, "hello");
+      Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", 45.5046, -122.632, 35, "Thai");
+      testFavorite.Save();
+
+      //Act
+      testFavorite.AddUser(testUser);
+      testFavorite.Delete();
+      List<Favorite> resultUserFavorites = testUser.GetUserFavorite();
+      List<Favorite> testUserFavorites = new List<Favorite>{};
+
+      //Assert
+      CollectionAssert.AreEqual(testUserFavorites, resultUserFavorites);
+    }
+
+    [TestMethod]
+    public void AddUser_AddsUserToFavorite_User()
+    {
+      //Arrange
+      Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", 45.5046, -122.632, 35, "Thai");
+      testFavorite.Save();
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(2, 25, "hello");
+
+      //Act
+      testFavorite.AddUser(testUser);
+      List<User> result = testFavorite.GetUser();
+      List<User> testList = new List<User>{testUser};
+
+      //Assert
+      int resultId = 0;
+      int testListId = 0;
+      Console.WriteLine("---------------Add User--------");
+      foreach(var test in testList)
+      {
+        testListId = test.GetUserId();
+        Console.WriteLine(test.GetUserId());
+        Console.WriteLine(test.GetName());
+        Console.WriteLine((test.GetPassword()));
+      }
+      Console.WriteLine("---------------------------");
+      foreach(var resultUser in result)
+      {
+        resultId = resultUser.GetUserId();
+        Console.WriteLine(resultUser.GetUserId());
+        Console.WriteLine(resultUser.GetName());
+        Console.WriteLine((resultUser.GetPassword()));
+      }
+      Assert.AreEqual(testListId, resultId);
+    }
+
+    [TestMethod]
+    public void GetUsers_ReturnsAllFavoritesUsers_UsersList()
+    {
+      //Arrange
+      Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", 45.5046, -122.632, 35, "Thai");
+      testFavorite.Save();
+      User firstUser = new User("test-user", "password");
+      firstUser.Save();
+      firstUser.Edit(2, 25, "hello");
+      User secondUser = new User("test-user1", "password1");
+      secondUser.Save();
+      secondUser.Edit(1, 25, "hi");
+
+      //Act
+      testFavorite.AddUser(firstUser);
+      List<User> result = testFavorite.GetUser();
+      List<User> testList = new List<User>{firstUser};
+      //Assert
+
+      int resultId = 0;
+      int testListId = 0;
+      Console.WriteLine("---------------Add User--------");
+      foreach(var test in testList)
+      {
+        testListId = test.GetUserId();
+        Console.WriteLine(test.GetUserId());
+        Console.WriteLine(test.GetName());
+        Console.WriteLine((test.GetPassword()));
+      }
+      Console.WriteLine("---------------------------");
+      foreach(var resultUser in result)
+      {
+        resultId = resultUser.GetUserId();
+        Console.WriteLine(resultUser.GetUserId());
+        Console.WriteLine(resultUser.GetName());
+        Console.WriteLine((resultUser.GetPassword()));
+      }
+      Assert.AreEqual(testListId, resultId);
+      //CollectionAssert.AreEqual(testList, result); --- Ask Lina Why CollectionAssert is not working for List<User> and List<Favorite>
+    }
   }
 }

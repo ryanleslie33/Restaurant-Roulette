@@ -173,79 +173,141 @@ namespace RestaurantRoulette.Tests
     public void Find_ReturnsUserInDatabase_User()
     {
       //Arrange
-      User testUser = new User("test-user", "password", 1, 1, "hello");
+      User testUser = new User("test-user", "password");
       testUser.Save();
+      testUser.Edit(1, 1, "hello");
 
       //Act
       User foundUser = User.Find(testUser.GetUserId());
 
       //Assert
-      Assert.AreEqual(testUser.GetName(), foundUser.GetName());
-      Assert.AreEqual(testUser.GetPassword(), foundUser.GetPassword());
+      Assert.AreEqual(testUser, foundUser);
     }
 
-    // [TestMethod]
-    // public void GetUserFavorite_ReturnsAllUserFavorites_FavoriteList()
-    // {
-    //   //Arrange
-    //   User testUser = new User("test-user", 1, 1, "hello");
-    //   testUser.Save();
-    //   Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
-    //   testFavorite.Save();
-    //   Favorite testFavorite2 = new Favorite("Mother's Bistro & Bar", "212 SW Stark St, Portland 97204", "https://www.zomato.com/portland/mothers-bistro-bar-portland/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/mothers-bistro-bar-portland/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.52, -122.674, 75, "American, Breakfast");
-    //   testFavorite2.Save();
-    //
-    //   //Act
-    //   testUser.AddFavoriteToUser(testFavorite);
-    //   testUser.AddFavoriteToUser(testFavorite2);
-    //   List<Favorite> savedFavorites = testUser.GetUserFavorite();
-    //   List<Favorite> testList = new List<Favorite> {testFavorite, testFavorite2};
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(testList, savedFavorites);
-    // }
-    //
-    // [TestMethod]
-    // public void AddFavoriteToUser_AddsFavoriteToUser_FavoriteList()
-    // {
-    //   //Arrange
-    //   User testUser = new User("test-user", 1, 1, "hello");
-    //   testUser.Save();
-    //   Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
-    //   testFavorite.Save();
-    //   Favorite testFavorite2 = new Favorite("Mother's Bistro & Bar", "212 SW Stark St, Portland 97204", "https://www.zomato.com/portland/mothers-bistro-bar-portland/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/mothers-bistro-bar-portland/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.52, -122.674, 75, "American, Breakfast");
-    //   testFavorite2.Save();
-    //
-    //   //Act
-    //   testUser.AddFavoriteToUser(testFavorite);
-    //   testUser.AddFavoriteToUser(testFavorite2);
-    //   List<Favorite> result = testUser.GetUserFavorite();
-    //   List<Favorite> testList = new List<Favorite>{testFavorite, testFavorite2};
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(testList, result);
-    // }
+    [TestMethod]
+    public void GetUserFavorite_ReturnsAllUserFavorites_FavoriteList()
+    {
+      //Arrange
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(1, 1, "hello");
+      Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
+      testFavorite.Save();
+      Favorite testFavorite2 = new Favorite("Mother's Bistro & Bar", "212 SW Stark St, Portland 97204", "https://www.zomato.com/portland/mothers-bistro-bar-portland/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/mothers-bistro-bar-portland/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.52, -122.674, 75, "American, Breakfast");
+      testFavorite2.Save();
 
-    // [TestMethod]
-    // public void Delete_DeletesUserAssociationsFromDatabase_UserList()
-    // {
-    //   //Arrange
-    //   User testUser = new User("test-user", 1, 1, "hello");
-    //   testUser.Save();
-    //   Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
-    //   testFavorite.Save();
-    //
-    //   //Act
-    //   testUser.AddFavorite(testFavorite);
-    //   testUser.Delete();
-    //   List<User> resultFavoriteUsers = testFavorite.GetUsers();
-    //   List<User> testFavoriteUsers = new List<User> {};
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(testFavoriteUsers, resultFavoriteUsers);
-    // }
+      //Act
+      testUser.AddFavoriteToUser(testFavorite);
+      testUser.AddFavoriteToUser(testFavorite2);
+      List<Favorite> savedFavorites = testUser.GetUserFavorite();
+      List<Favorite> testList = new List<Favorite> {testFavorite, testFavorite2};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, savedFavorites);
+    }
+
+    [TestMethod]
+    public void AddFavoriteToUser_AddsFavoriteToUser_FavoriteList()
+    {
+      //Arrange
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(1, 1, "hello");
+      Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
+      testFavorite.Save();
+      Favorite testFavorite2 = new Favorite("Mother's Bistro & Bar", "212 SW Stark St, Portland 97204", "https://www.zomato.com/portland/mothers-bistro-bar-portland/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/mothers-bistro-bar-portland/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.52, -122.674, 75, "American, Breakfast");
+      testFavorite2.Save();
+
+      //Act
+      testUser.AddFavoriteToUser(testFavorite);
+      testUser.AddFavoriteToUser(testFavorite2);
+      List<Favorite> result = testUser.GetUserFavorite();
+      List<Favorite> testList = new List<Favorite>{testFavorite, testFavorite2};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
+    }
 
 
+    [TestMethod]
+    public void Delete_DeletesUserAssociationsFromDatabase_UserList()
+    {
+      //Arrange
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(1, 1, "hello");
+      Favorite testFavorite = new Favorite("Pok Pok", "3226 SE Division Street 97202", "https://www.zomato.com/portland/pok-pok-richmond/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pok-pok-richmond/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5046, -122.632, 35, "Thai");
+      testFavorite.Save();
 
+      //Act
+      testUser.AddFavoriteToUser(testFavorite);
+      testUser.Delete();
+      List<User> resultFavoriteUsers = testFavorite.GetUser();
+      List<User> testFavoriteUsers = new List<User> {};
+
+      //Assert
+      int resultId = 0;
+      int testListId = 0;
+      Console.WriteLine("---------------Add User--------");
+      foreach(var test in testFavoriteUsers)
+      {
+        testListId = test.GetUserId();
+        Console.WriteLine(test.GetUserId());
+        Console.WriteLine(test.GetName());
+        Console.WriteLine((test.GetPassword()));
+      }
+      Console.WriteLine("---------------------------");
+      foreach(var resultUser in resultFavoriteUsers)
+      {
+        resultId = resultUser.GetUserId();
+        Console.WriteLine(resultUser.GetUserId());
+        Console.WriteLine(resultUser.GetName());
+        Console.WriteLine((resultUser.GetPassword()));
+      }
+      Assert.AreEqual(testListId, resultId);
+      // CollectionAssert.AreEqual(testFavoriteUsers, resultFavoriteUsers);--- Ask Lina Why CollectionAssert is not working for List<User> and List<Favorite>
+    }
+
+    [TestMethod]
+    public void AllRestaurantSortList_ReturnsAllRestaurantsInUserCriteria_FavoriteList()
+    {
+      //Arrange
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(2, 25, "hello");
+      Favorite testFavorite = new Favorite("Voodoo Doughnut", "22 SW 3rd Avenue, Portland 97204", "https://www.zomato.com/portland/voodoo-doughnut-chinatown-old-town/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/voodoo-doughnut-chinatown-old-town/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5227, -122.673, 20, "Cuban");
+
+      Favorite testFavorite2 = new Favorite("Pambiche", "2811 NE Glisan Street 97232", "https://www.zomato.com/portland/pambiche-kerns/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop", "https://www.zomato.com/portland/pambiche-kerns/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1", 45.5266, -122.637, 25, "Cuban");
+
+
+      //Act
+
+      List<Favorite> result = testUser.AllRestaurantSortList();
+      List<Favorite> testList = new List<Favorite>{testFavorite, testFavorite2};
+
+      //Assert
+
+      Console.WriteLine(testList.GetType());
+      Console.WriteLine(result.GetType());
+      string resultName = "";
+      string testName = "";
+      foreach(var favorite in result)
+      {
+
+        resultName = favorite.GetName();
+        Console.WriteLine(favorite.GetName());
+        Console.WriteLine((favorite.GetAddress()));
+      }
+      Console.WriteLine("---------------------------");
+      foreach(var favorite in testList)
+      {
+        testName = favorite.GetName();
+        Console.WriteLine(favorite.GetName());
+        Console.WriteLine(favorite.GetAddress());
+
+      }
+      Assert.AreEqual(resultName, testName);
+
+    }
   }
 }
