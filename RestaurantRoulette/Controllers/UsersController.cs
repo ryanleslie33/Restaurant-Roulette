@@ -58,17 +58,19 @@ namespace RestaurantRoulette.Controllers
     public ActionResult All(int id)
     {
       User foundUser = RestaurantRoulette.Models.User.Find(id);
-      List<Favorite> allRestaurantList = new List<Favorite>{ };
       List<Favorite> allRestaurantList = foundUser.AllRestaurantSortList();
-      return View(allRestaurantList);
+      List<Marker> foundMarkers = Marker.GetAllRestaurantMarkers(allRestaurantList);
+      return View(foundMarkers);
     }
 
     [HttpGet("/users/{id}/all")]
     public ActionResult Fav(int id)
     {
       User foundUser = RestaurantRoulette.Models.User.Find(id);
-      List<Favorite> allFavRestaurantList = new List<Favorite>{ };
+      // List<Favorite> allFavRestaurantList = new List<Favorite>{ };
       List<Favorite> allFavRestaurantList = foundUser.GetUserFavorite();
+
+
       return View(allFavRestaurantList);
     }
 
