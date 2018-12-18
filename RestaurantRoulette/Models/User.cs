@@ -246,7 +246,7 @@ namespace RestaurantRoulette.Models
         userBio = rdr.GetString(5);
       }
 
-      User foundUser = new User(userName, userPassword, userDistance, userPrice, userBio, userId);
+      RestaurantRoulette.Models.User foundUser = new RestaurantRoulette.Models.User(userName, userPassword, userDistance, userPrice, userBio, userId);
 
       conn.Close();
 

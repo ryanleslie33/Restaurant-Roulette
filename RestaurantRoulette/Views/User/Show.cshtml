@@ -1,7 +1,9 @@
-@using RestaurantRoulette.Models;
+
 @{
   Layout = "_Layout";
 }
+@using RestaurantRoulette.Models
+
 <div class="container">
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Restaurant Roulette</a>
@@ -28,21 +30,16 @@
       <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
       <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
     </div>
-    <div class = "parent">
-      <img class= "image1"rc="Images/Wheel.png" alt="">
-      <img class="image2"src="Images/ball.png" alt="">
-      <h4 class="element-align"><strong>User Profile</strong></h4>
+    <!-- <div class = "parent">
+    <img class= "image1"rc="Images/Wheel.png" alt="">
+    <img class="image2"src="Images/ball.png" alt=""> -->
+    <h4 class="element-align"><strong>User Profile</strong></h4>
+    <p>@Model.GetName()</p>
+    <p>@Model.GetBio()</p>
+    <p>@Model.GetPrice()</p>
+    <p>@Model.GetDistance()</p>
 
-      <p>@Model.GetName()</p>
-      <p>@Model.GetBio()</p>
-      <p>@Model.GetPrice()</p>
-      <p>@Model.GetDistance()</p>
-
-      <a href="/users/@Model.GetId()" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
-      @* <a href="/users/" class="btn btn-danger btn-lg" role="button">Edit Details</a>
-      <a href="\" class="btn btn-danger btn-lg" role="button">Edit Details</a> *@
-
-
-
-    </div>
+    <a href="/users/@Model.GetId()/edit" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
+    <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">All Options</a>
+    <a href="/users/@Model.GetId()/fav" class="btn btn-danger btn-lg" role="button">Fav Options</a>
   </div>

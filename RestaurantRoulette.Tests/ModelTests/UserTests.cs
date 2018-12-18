@@ -107,7 +107,7 @@ namespace RestaurantRoulette.Tests
       User newUser = new User("test-user", "password", 1, 1, "hello");
 
       //Act
-      int result = newUser.GetUserId();
+      int result = newUser.GetId();
 
       //Assert
       Assert.AreEqual(0, result);
@@ -131,12 +131,12 @@ namespace RestaurantRoulette.Tests
       User testUser = new User("test-user", "password", 1, 1, "hello");
       Console.WriteLine("Save Test");
       testUser.Save();
-      int testId = testUser.GetUserId();
+      int testId = testUser.GetId();
 
       //Act
       User savedUser = User.GetAll()[0];
 
-      int resultId = savedUser.GetUserId();
+      int resultId = savedUser.GetId();
       string resultName = savedUser.GetName();
       string resultPass = savedUser.GetPassword();
 
@@ -159,9 +159,9 @@ namespace RestaurantRoulette.Tests
 
       //Act
       testUser.Edit(updateDistance, updatePrice, updateBio);
-      int resultDistance = User.Find(testUser.GetUserId()).GetDistance();
-      int resultPrice = User.Find(testUser.GetUserId()).GetPrice();
-      string resultBio = User.Find(testUser.GetUserId()).GetBio();
+      int resultDistance = User.Find(testUser.GetId()).GetDistance();
+      int resultPrice = User.Find(testUser.GetId()).GetPrice();
+      string resultBio = User.Find(testUser.GetId()).GetBio();
 
       //Assert
       Assert.AreEqual(resultDistance, updateDistance);
@@ -178,9 +178,26 @@ namespace RestaurantRoulette.Tests
       testUser.Edit(1, 1, "hello");
 
       //Act
-      User foundUser = User.Find(testUser.GetUserId());
+      User foundUser = User.Find(testUser.GetId());
 
       //Assert
+      Assert.AreEqual(testUser, foundUser);
+    }
+
+    [TestMethod]
+    public void FindWithUserNameAndPassword_ReturnsUserInDatabaseAfterLogin_User()
+    {
+      //Arrange
+      User testUser = new User("test-user", "password");
+      testUser.Save();
+      testUser.Edit(1, 1, "hello");
+
+      //Act
+      User foundUser = User.FindWithUserNameAndPassword(testUser.GetName(), testUser.GetPassword());
+
+      //Assert
+      Console.WriteLine("------find by name and password ----");
+      Console.WriteLine("name: " + foundUser.GetName() + " id: " + foundUser.GetId() + " pass: " + foundUser.GetPassword());
       Assert.AreEqual(testUser, foundUser);
     }
 
