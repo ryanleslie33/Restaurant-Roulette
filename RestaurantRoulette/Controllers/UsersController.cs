@@ -59,7 +59,7 @@ namespace RestaurantRoulette.Controllers
     {
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allRestaurantList = new List<Favorite>{ };
-      List<Favorite> allRestaurantList = foundUser.AllRestaurantSortList();
+      allRestaurantList = foundUser.AllRestaurantSortList();
       return View(allRestaurantList);
     }
 
@@ -68,7 +68,7 @@ namespace RestaurantRoulette.Controllers
     {
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allFavRestaurantList = new List<Favorite>{ };
-      List<Favorite> allFavRestaurantList = foundUser.GetUserFavorite();
+      allFavRestaurantList = foundUser.GetUserFavorite();
       return View(allFavRestaurantList);
     }
 
