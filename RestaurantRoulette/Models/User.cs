@@ -110,8 +110,8 @@ namespace RestaurantRoulette.Models
       cmd.Parameters.AddWithValue("@newPass", this._password);
       cmd.ExecuteNonQuery();
 
-      _id = (int) cmd.LastInsertedId;
-      Console.WriteLine(_id);
+      this._id = (int) cmd.LastInsertedId;
+
 
       conn.Close();
       if (conn != null)

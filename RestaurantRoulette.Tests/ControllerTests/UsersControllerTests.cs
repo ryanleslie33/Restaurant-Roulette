@@ -49,7 +49,7 @@ namespace RestaurantRoulette.Tests
     }
 
     [TestMethod]
-    public void Index_HasCorrectModelType_StylistList()
+    public void Show_HasCorrectModelType_StylistList()
     {
       //Arrange
       UserController controller = new UserController();
