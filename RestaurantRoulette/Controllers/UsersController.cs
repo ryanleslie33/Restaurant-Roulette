@@ -32,7 +32,7 @@ namespace RestaurantRoulette.Controllers
       return View("Show", newFoundUser);
     }
 
-    [HttpGet("/users/{userName}/{userPassword}")]
+    [HttpPost("/users/{userName}/{userPassword}")]
     public ActionResult Show(string userName, string userPassword)
     {
       User foundUser = RestaurantRoulette.Models.User.FindWithUserNameAndPassword(userName, userPassword);
@@ -51,7 +51,7 @@ namespace RestaurantRoulette.Controllers
     {
       User editUser = RestaurantRoulette.Models.User.Find(id);
       editUser.Edit(userDist, userPrice, userBio);
-      return RedirectToAction("Show");
+      return View("Show", editUser);
     }
 
     [HttpGet("/users/{id}/all")]
@@ -63,13 +63,16 @@ namespace RestaurantRoulette.Controllers
       return View(allRestaurantList);
     }
 
-    [HttpGet("/users/{id}/all")]
+    [HttpGet("/users/{id}/fav")]
     public ActionResult Fav(int id)
     {
+      Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allFavRestaurantList = new List<Favorite>{ };
       allFavRestaurantList = foundUser.GetUserFavorite();
-      return View(allFavRestaurantList);
+      model.Add("user",  foundUser);
+      model.Add("favoriteRestList", allFavRestaurantList);
+      return View(model);
     }
 
   }

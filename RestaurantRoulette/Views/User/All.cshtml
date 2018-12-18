@@ -12,12 +12,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home Page</a>
           </li>
-        <li class="nav-item">
-          <a href="/users/new">Register</a>
-        </li>
-        <li class="nav-item">
-          <a href="/users">Log In</a>
-        </li>
+          <li class="nav-item">
+            <a href="/users/new">Register</a>
+          </li>
+          <li class="nav-item">
+            <a href="/users">Log In</a>
+          </li>
+          @* <li class="nav-item">
+          <a href="/users/@Model["user"].GetName()/@Model["user"].GetPassword()">User Details</a>
+        </li> *@
         </ul>
       </div>
     </nav>
@@ -32,26 +35,31 @@
       <img class= "image1"rc="Images/Wheel.png" alt="">
       <img class="image2"src="Images/ball.png" alt="">
       <h4 class="element-align"><strong>User Preferences</strong></h4>
-      <form action="/users/@Model.GetId()/update" method="post">
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="userDist">Enter Distance Range:</label>
-            <input type="text" class="form-control" id="userDist" name="userDist" placeholder="Distance" required>
+      <br>
+      @if (@Model.Count == 0)
+      {
+        <p class="element-align"><strong>No Restaurant Matches Your Criteria.</strong></p>
+      }
+
+      <br>
+      <div class="row">
+        @foreach (var rest in Model)
+        {
+          <div class="col-sm-6">
+          <div class="card">
+          <div class="card-body">
+            <p class="card-title">@rest.GetName()</p>
+            <h5 class="card-title">@rest.GetAddress()</h5>
+            <h5 class="card-title">@rest.GetCostForTwo()</h5>
+            <h5 class="card-title">@rest.GetFavCusine()</h5>
+            <h5 class="card-title">@rest.GetMenuUrl()</h5>
+            <h5 class="card-title">@rest.GetPageUrl()</h5>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="userPrice">Enter Price Range(USD):</label>
-            <input type="text" class="form-control" id="userPrice" name="userPrice" placeholder="Price" required>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="userBio">Something About Yourself:</label>
-            <input type="text" class="form-control" id="userBio" name="userBio" placeholder="Bio">
           </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-left: 45%">Add My Details!</button>
-      </form>
+        }
     </div>
   </div>
+  <a href="/" class="btn btn-danger btn-lg" role="button">Back to Home Page</a>
+  @* <a href="/users/@Model.GetName()/@Model.GetPassword()" class="btn btn-danger btn-lg" role="button">Back to the profile page</a> *@
+  @* <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">Find one restaurant !!</a> *@
