@@ -23,6 +23,10 @@ body {
   height: 180px;
 }
 
+.home {
+  margin-left: 42%;
+}
+
 .buttons {
   position:absolute;
   width: 200px;
