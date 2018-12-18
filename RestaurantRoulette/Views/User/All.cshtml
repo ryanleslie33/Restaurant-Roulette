@@ -36,14 +36,14 @@
       <img class="image2"src="Images/ball.png" alt="">
       <h4 class="element-align"><strong>User Preferences</strong></h4>
       <br>
-      @if (@Model.Count == 0)
+      @if (@Model["regularRestList"].Count == 0)
       {
         <p class="element-align"><strong>No Restaurant Matches Your Criteria.</strong></p>
       }
 
       <br>
       <div class="row">
-        @foreach (var rest in Model)
+        @foreach (var rest in Model["regularRestList"])
         {
           <div class="col-sm-6">
           <div class="card">
@@ -61,5 +61,6 @@
     </div>
   </div>
   <a href="/" class="btn btn-danger btn-lg" role="button">Back to Home Page</a>
+  <a href="/users/@Model["user"].GetId()/regular" class="btn btn-danger btn-lg" role="button">Roll</a>
   @* <a href="/users/@Model.GetName()/@Model.GetPassword()" class="btn btn-danger btn-lg" role="button">Back to the profile page</a> *@
   @* <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">Find one restaurant !!</a> *@
