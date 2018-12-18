@@ -57,11 +57,11 @@ namespace RestaurantRoulette.Controllers
     [HttpGet("/users/{id}/all")]
     public ActionResult All(int id)
     {
+      Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allRestaurantList = foundUser.AllRestaurantSortList();
       List<Marker> foundMarkers = Marker.GetAllRestaurantMarkers(allRestaurantList);
       return View(foundMarkers);
-
     }
 
     [HttpGet("/users/{id}/fav")]
