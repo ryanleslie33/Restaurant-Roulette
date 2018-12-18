@@ -2,8 +2,9 @@
 @{
   Layout = "_Layout";
 }
-<div class="container">
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<body>
+  <div class="nav_bar">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
     <a class="navbar-brand" href="/">Restaurant Roulette</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span></button>
@@ -21,31 +22,43 @@
         </ul>
       </div>
     </nav>
-    <div class="jumbotron jumbotron-fluid">
+  </div>
+  <div class="logo">
+    <img class="mainLogo" src="../Images/RestaurantRouletteLogo.png" alt="picture of logo">
+  </div>
+  <br>
+
+
+    @* <div class="jumbotron jumbotron-fluid">
       <h1 class="display-4">Restaurant Roulette</h1>
       <p class="lead">Game To Select Random Restaurant</p>
       <hr class="my-4">
       <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
       <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
-    </div>
+    </div> *@
     <div class = "parent">
-      <img class= "image1"rc="Images/Wheel.png" alt="">
-      <img class="image2"src="Images/ball.png" alt="">
+      @* <img class= "image1"rc="Images/Wheel.png" alt="">
+      <img class="image2"src="Images/ball.png" alt=""> *@
       <h4 class="element-align"><strong>User Registration</strong></h4>
       <form action="/users" method="post">
         <div class="form-row">
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-8">
             <label for="userName">Name:</label>
             <input type="text" class="form-control" id="userName" name="userName" placeholder="Name" required>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-8">
             <label for="userPassword">Password:</label>
             <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password" required>
           </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-left: 45%">Create Account and Login!</button>
+          <div class="form-group col-md-8">
+       <label for="inputConfirmPassword">Confirm password</label>
+       <input type="password" class="form-control"  placeholder="Re-enter password">
+     </div>
+   </div class="registrationButton">
+        <button type="submit" class="btn btn-outline-warning">Create Account and Login!</button>
       </form>
     </div>
   </div>
+</body>
