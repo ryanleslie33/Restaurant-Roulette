@@ -207,7 +207,7 @@ namespace RestaurantRoulette.Models
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO users_favorites (user_id, restaurant_id) VALUES (@userId, @restaurantId);";
-      cmd.Parameters.AddWithValue("@userId", newUser.GetUserId());
+      cmd.Parameters.AddWithValue("@userId", newUser.GetId());
       cmd.Parameters.AddWithValue("@restaurantId", this.GetId());
       cmd.ExecuteNonQuery();
       conn.Close();

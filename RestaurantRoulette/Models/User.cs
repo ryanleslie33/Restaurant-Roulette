@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
+//using System.Security.Claims;
 
 namespace RestaurantRoulette.Models
 {
@@ -36,7 +37,7 @@ namespace RestaurantRoulette.Models
     {
       return _password;
     }
-  
+
 
     public int GetDistance()
     {
@@ -53,7 +54,7 @@ namespace RestaurantRoulette.Models
       return _bio;
     }
 
-    public int GetUserId()
+    public int GetId()
     {
       return _id;
     }
@@ -67,7 +68,7 @@ namespace RestaurantRoulette.Models
       else
       {
         User newUser = (User) otherUser;
-        bool idEquality = this.GetUserId().Equals(newUser.GetUserId());
+        bool idEquality = this.GetId().Equals(newUser.GetId());
         bool nameEquality = this.GetName().Equals(newUser.GetName());
         bool passwordEquality = this.GetPassword().Equals(newUser.GetPassword());
         bool distanceEquality = this.GetDistance().Equals(newUser.GetDistance());
@@ -324,7 +325,7 @@ namespace RestaurantRoulette.Models
       MySqlCommand cmd = new MySqlCommand("DELETE FROM users WHERE id = @userId; DELETE FROM users_favorites WHERE user_id = @UserId;", conn);
 
       MySqlParameter categoryIdParameter = new MySqlParameter();
-      cmd.Parameters.AddWithValue("@UserId", this.GetUserId());
+      cmd.Parameters.AddWithValue("@UserId", this.GetId());
       cmd.ExecuteNonQuery();
       if (conn != null)
       {
