@@ -2,40 +2,56 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
-  </head>
-  <body>
-    <h3>Restaurants within price range and distance.</h3>
+<head>
+  <style>
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+  </style>
+</head>
+<body>
+  <h3>Restaurants within price range and distance.</h3>
 
-    <div id="map"></div>
-    <script>
+  <div id="map"></div>
+  <script>
 
-function initMap() {
-
-  var epicodus = {lat: 45.520589099999995, lng: -122.6778006};
-
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: epicodus});
-
-  @foreach (var marker in @Model)
+  function addMarker(latitude, longitude, map)
   {
+    var latLng = new google.maps.LatLng(latitude, longitude);
 
-    var latLng = new google.maps.LatLng(@marker.GetMarkerLatitude(), @marker.GetMarkerLongitude());
     var marker = new google.maps.Marker({
-          position: latLng,
-          map: map
+      position: latLng,
+      map: map,
+      draggable: false
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+      infowindow.open(map, marker);
     });
   }
-}
+    function initMap() {
+
+      var epicodus = {lat: 45.520589099999995, lng: -122.6778006};
+
+      var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 4, center: epicodus});
+        var marker1 = new google.maps.Marker({position: epicodus, map: map});
+        var markers;
+        @foreach(var fav in @Model)
+        {
+          <text>
+            addMarker(@fav.GetMarkerLatitude(), @fav.GetMarkerLongitude(), map);
+          </text>
+        }
+    }
+
+    // Now add markers
     </script>
+
+
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr-hPtZ78DXpBPdJObRUqgBGrCbL7M0lE&callback=initMap">
     </script>
   </body>
-</html>
+  </html>
