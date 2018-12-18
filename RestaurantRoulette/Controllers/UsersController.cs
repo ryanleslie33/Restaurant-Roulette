@@ -59,11 +59,9 @@ namespace RestaurantRoulette.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
-      List<Favorite> allRestaurantList = new List<Favorite>{ };
-      allRestaurantList = foundUser.AllRestaurantSortList();
-      model.Add("user",  foundUser);
-      model.Add("regularRestList", allRestaurantList);
-      return View(model);
+      List<Favorite> allRestaurantList = foundUser.AllRestaurantSortList();
+      List<Marker> foundMarkers = Marker.GetAllRestaurantMarkers(allRestaurantList);
+      return View(foundMarkers);
     }
 
     [HttpGet("/users/{id}/fav")]
@@ -71,8 +69,7 @@ namespace RestaurantRoulette.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
-      List<Favorite> allFavRestaurantList = new List<Favorite>{ };
-      allFavRestaurantList = foundUser.GetUserFavorite();
+      List<Favorite> allFavRestaurantList = foundUser.GetUserFavorite();
       model.Add("user",  foundUser);
       model.Add("favoriteRestList", allFavRestaurantList);
       return View(model);

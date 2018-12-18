@@ -21,11 +21,11 @@ namespace RestaurantRoulette.Controllers
     }
 
     [HttpGet("/users/{id}/fav")]
-    public ActionResult favRoll()
+    public ActionResult favRoll(int id)
     {
-      //User foundUser = RestaurantRoulette.Models.User.Find(id);
+      User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allFavoriteList = new List<Favorite>{ };
-      allFavoriteList = RestaurantRoulette.Models.User.GetUserFavorite();
+      allFavoriteList = foundUser.GetUserFavorite();
       int favoriteRestListCount = allFavoriteList.Count;
       int result;
       Random rnd = new Random();
