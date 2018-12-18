@@ -1,13 +1,12 @@
-
-/*.container {
-  background-color:n
+.nav_bar {
+  font-style: italic;
 }
 .topPhoto {
   display: block;
-  margin-top: 75px;
-  margin-left: 150px;
+  margin-top: 300px;
+  margin-left: 300px;
   /* margin-right: 100px; */
-  /*width: 175%;
+  width: 50%;
 }
 
 .wheel {
@@ -15,41 +14,25 @@
   margin-top: 75px;
   margin-left: auto;
   margin-right: auto;
-  width: 250%;
+  width: 25%;
 }
 
-body {
+.container{
   background: radial-gradient( circle, transparent 50%, black 150%), #146E20;
   height: 180px;
 }
 
 .buttons {
- color: black;
- position:absolute;
- width: 180px;
- height: 80px;
- margin-left: 25px;
- bottom:25px;
+  position:absolute;
+  width: 500px;
+  height: 80px;
+  margin-left: 900px;
+  bottom:25px;
 }
 
-.logo {
-  display: center;
-  margin-top: 45px;
-  margin-left: 200px;
-  width: 25%;
-}
+/* above is css for splash page */
 
-.goButtons {
-   color: black;
-   position:absolute;*/
-   /* width: 180px;
-   height: 80px; */
-   /*margin-left: 25px;
-   bottom:25px;
-}
-
-
-@-webkit-keyframes rotate {
+/* @-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0deg);
   }
@@ -79,8 +62,8 @@ body {
     -webkit-animation-timing-function: linear;
 
 
-}
-.parent {
+} */
+/* .parent {
   position: relative;
   top: 0;
   left: 0;
@@ -94,4 +77,4 @@ body {
   position: absolute;
   top: 30px;
   left: 70px;
-}*/
+}*/ */
