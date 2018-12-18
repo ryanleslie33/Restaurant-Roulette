@@ -1,27 +1,48 @@
 @using RestaurantRoulette.Models;
 @{
- Layout = "_Layout";
+  Layout = "_Layout";
 }
+<div class="container">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Restaurant Roulette</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home Page</a>
+          </li>
+          <li class="nav-item">
+            <a href="/users/new">Register</a>
+          </li>
+          <li class="nav-item">
+            <a href="/users">Log In</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4">Restaurant Roulette</h1>
+      <p class="lead">Game To Select Random Restaurant</p>
+      <hr class="my-4">
+      <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
+      <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
+    </div>
+    <div class = "parent">
+      <img class= "image1"rc="Images/Wheel.png" alt="">
+      <img class="image2"src="Images/ball.png" alt="">
+      <h4 class="element-align"><strong>User Profile</strong></h4>
 
- @if (@Model.Count == 0)
-{
- <h3>No Users have been added yet!</h3>
-}
+      <p>@Model.GetName()</p>
+      <p>@Model.GetBio()</p>
+      <p>@Model.GetPrice()</p>
+      <p>@Model.GetDistance()</p>
 
-@foreach (User user in Model)
-{
-
-  <h2>@user.GetName()</h2>
-  <h2>@user.GetPassword()</h2>
-}
+      <a href="/users/@Model.GetId()" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
+      @* <a href="/users/" class="btn btn-danger btn-lg" role="button">Edit Details</a>
+      <a href="\" class="btn btn-danger btn-lg" role="button">Edit Details</a> *@
 
 
 
-
-<form class="" action="user/edit" method="post">
-
-  <h2>@Model.GetDistance()</h2>
-  <h2>@Model.GetPrice()</h2>
-
-  <button type="submit" name="button">Edit Price and Distance</button>
-</form>
+    </div>
+  </div>
