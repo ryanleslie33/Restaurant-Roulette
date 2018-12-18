@@ -35,7 +35,7 @@
       var epicodus = {lat: 45.520589099999995, lng: -122.6778006};
 
       var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 4, center: epicodus});
+        document.getElementById('map'), {zoom: 14, center: epicodus});
         var marker1 = new google.maps.Marker({position: epicodus, map: map});
         var markers;
         @foreach(var fav in @Model)
