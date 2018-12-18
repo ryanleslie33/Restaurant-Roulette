@@ -48,6 +48,7 @@ body {
 
 .form-row {
   margin-left: 350px;
+  margin-right: inherit;
 }
 
 .element-align {
@@ -56,7 +57,19 @@ body {
 
 .registration {
   margin-left: 265px;
+  margin-right: 265px;
 }
+
+/* css for user index page  */
+.element-align-index{
+  margin-left: 47%;
+}
+
+.form-row1 {
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
 
 /* .buttons {
   position:absolute;
