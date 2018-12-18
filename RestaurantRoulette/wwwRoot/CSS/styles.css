@@ -5,9 +5,9 @@
 .topPhoto {
   display: block;
   margin-top: 200px;
-  margin-left: 300px;
-  /* margin-right: 100px; */
-  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 55%;
 }
 
 .wheel {
@@ -25,9 +25,10 @@ body {
 
 .buttons {
   position:absolute;
-  width: 500px;
+  width: 200px;
   height: 80px;
-  margin-left: 525px;
+  margin-left: 575px;
+  margin-right: auto;
   bottom:25px;
 }
 
@@ -36,7 +37,7 @@ body {
 .mainLogo {
   display: center;
   margin-top: 75px;
-  margin-left: 500px;
+  margin-left: 600px;
   margin-right: 600px;
   width: 20%;
 }
@@ -46,12 +47,21 @@ body {
 }
 
 .element-align {
-  margin-left: 515px;
+  margin-left: 600px;
 }
 
-.registrationButton {
-
+.registration {
+  margin-left: 265px;
 }
+
+/* .buttons {
+  position:absolute;
+  width: 200px;
+  height: 80px;
+  margin-left:235px;
+  bottom:25px;
+  color: red;
+} */
 
 /* @-webkit-keyframes rotate {
   from {
