@@ -14,7 +14,9 @@
   }
   </style>
 </head>
+
 <body>
+  <a href="/users/@Model["user"].GetId()/regular">Roll</a>
   <h3>Restaurants within price range and distance.</h3>
 
   <div id="map"></div>
@@ -42,7 +44,7 @@
         document.getElementById('map'), {zoom: 14, center: epicodus});
         var marker1 = new google.maps.Marker({position: epicodus, map: map});
         var markers;
-        @foreach(var fav in @Model)
+        @foreach(var fav in @Model["markers"])
         {
           <text>
             addMarker(@fav.GetMarkerLatitude(), @fav.GetMarkerLongitude(), map);
@@ -57,7 +59,6 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr-hPtZ78DXpBPdJObRUqgBGrCbL7M0lE&callback=initMap">
     </script>
-    @* <a href="/" class="btn btn-danger btn-lg" role="button">Back to Home Page</a>
-    <a href="/users/@Model["user"].GetId()/regular" class="btn btn-danger btn-lg" role="button">Roll</a> *@
+
   </body>
   </html>

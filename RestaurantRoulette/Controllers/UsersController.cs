@@ -61,7 +61,10 @@ namespace RestaurantRoulette.Controllers
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allRestaurantList = foundUser.AllRestaurantSortList();
       List<Marker> foundMarkers = Marker.GetAllRestaurantMarkers(allRestaurantList);
-      return View(foundMarkers);
+      model.Add("user", foundUser);
+      model.Add("markers", foundMarkers);
+      //return View(foundMarkers);
+      return View(model);
     }
 
     [HttpGet("/users/{id}/favorites-list")]
