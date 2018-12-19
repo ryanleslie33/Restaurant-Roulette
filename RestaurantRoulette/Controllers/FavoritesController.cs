@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantRoulette.Models;
 using System.Collections.Generic;
 
+namespace RestaurantRoulette.Controllers
+{
   public class FavoriteController : Controller
   {
     [HttpGet("/users/{id}/regular")]
