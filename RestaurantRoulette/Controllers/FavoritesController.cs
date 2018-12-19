@@ -30,8 +30,7 @@ namespace RestaurantRoulette.Controllers
     {
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allFavoriteList = new List<Favorite>{ };
-      //allFavoriteList = RestaurantRoulette.Models.User.GetUserFavorite();
-        allFavoriteList = foundUser.GetUserFavorite();
+      allFavoriteList = foundUser.GetUserFavorite();
       int favoriteRestListCount = allFavoriteList.Count;
       int result;
       Random rnd = new Random();
