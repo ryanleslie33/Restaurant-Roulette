@@ -16,28 +16,10 @@
         </div>
       </nav>
     </div>
-    @* <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-4">Restaurant Roulette</h1>
-    <p class="lead">Game To Select Random Restaurant</p>
-    <hr class="my-4">
-    <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
-    <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
-  </div> *@
-  @* <div class="row">
-  <div class="logo">
-  <img class="mainLogo" src="../Images/RestaurantRouletteLogo.png" alt="picture of logo">
-</div>
-<div class="card">
-<img src="../images/personClipArt.png" alt="Avatar" style="width:100%">
-<h4>User</h4>
-</div>
-<div class="inputNotes">
-<form>
-<textarea>Some text...</textarea>
-</form>
-</div>
-</div> *@
-  <h4 class="element-align"><strong>User Profile</strong></h4>
+  <div class="element-align">
+
+  
+  <h4 class=""><strong>User Profile</strong></h4>
   <p>@Model.GetName()</p>
   <p>@Model.GetBio()</p>
   <p>@Model.GetPrice()</p>
@@ -49,6 +31,8 @@
         <div class=priceRange>
           <p>$25 - $100</p>
         </div>
+
+
         <input type="range" class="form-control-range" id="formControlRange">
       </div>
     </form>
@@ -64,6 +48,8 @@
       </div>
     </form>
   </div>
+
+
   <div class="show_buttons">
     <a href="/users/@Model.GetId()/edit" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
     <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">All Options</a>

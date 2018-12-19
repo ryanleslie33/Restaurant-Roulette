@@ -40,7 +40,7 @@ body {
 
 h4 {
   color: gold;
-  margin-left: 35%;
+  margin-left: 30%;
 }
 
 
@@ -49,10 +49,12 @@ h4 {
 .mainLogo {
   display: center;
   margin-top: 75px;
-  margin-left: 45%;
+  margin-left:42%;
   /* margin-right: 600px; */
   width: 20%;
 }
+
+
 
 .new_form {
   margin-left: 17%;
@@ -63,9 +65,20 @@ h4 {
   margin-right: inherit;
 } */
 
+.range {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
 .element-align {
   margin-left: 600px;
 }
+
+.edit_button {
+  margin-left: 45%
+}
+
+
 
 .registration {
   margin-left: 27%;
