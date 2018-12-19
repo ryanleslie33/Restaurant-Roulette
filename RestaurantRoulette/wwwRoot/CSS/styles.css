@@ -1,12 +1,13 @@
+/* css for home page */
 .nav_bar {
   font-style: italic;
 }
 .topPhoto {
   display: block;
-  margin-top: 300px;
-  margin-left: 300px;
-  /* margin-right: 100px; */
-  width: 50%;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 55%;
 }
 
 .wheel {
@@ -17,20 +18,104 @@
   width: 25%;
 }
 
-.container{
+body {
   background: radial-gradient( circle, transparent 50%, black 150%), #146E20;
   height: 180px;
 }
 
+.home {
+  margin-left: 42%;
+}
+
 .buttons {
   position:absolute;
-  width: 500px;
+  width: 200px;
   height: 80px;
-  margin-left: 900px;
+  margin-left: 575px;
+  margin-right: auto;
   bottom:25px;
 }
 
-/* above is css for splash page */
+/* css for newUser page */
+
+.mainLogo {
+  display: center;
+  margin-top: 75px;
+  margin-left: 600px;
+  margin-right: 600px;
+  width: 20%;
+}
+
+.form-row {
+  margin-left: 350px;
+  margin-right: inherit;
+}
+
+.element-align {
+  margin-left: 600px;
+}
+
+.registration {
+  margin-left: 265px;
+  margin-right: 265px;
+}
+
+/* css for user index page  */
+.element-align-index{
+  margin-left: 47%;
+}
+
+.form-row1 {
+  margin-left: 30%;
+  margin-right: 30%;
+}
+/* css for show page  */
+
+.show_buttons {
+  margin-left: 265px;
+  margin-right: 265px;
+}
+
+/* .row_range {
+
+} */
+
+.price {
+  text-align: center;
+  color: black;
+  margin-top: 25px;
+  margin-left: 75px;
+  margin-right: 75px;
+  font-size: 25px;
+}
+
+.priceRange {
+font-size: 16px;
+color: #ECBD32;
+}
+
+.distance{
+  text-align: center;
+  color: black;
+  margin-top: 25px;
+  margin-left: 75px;
+  margin-right: 75px;
+  font-size: 25px;
+}
+
+.distanceRange {
+font-size: 16px;
+color: #ECBD32;
+}
+
+/* .buttons {
+  position:absolute;
+  width: 200px;
+  height: 80px;
+  margin-left:235px;
+  bottom:25px;
+  color: red;
+} */
 
 /* @-webkit-keyframes rotate {
   from {
@@ -61,9 +146,8 @@
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 
-
-} */
-/* .parent {
+}
+.parent {
   position: relative;
   top: 0;
   left: 0;
@@ -77,4 +161,4 @@
   position: absolute;
   top: 30px;
   left: 70px;
-}*/ */
+} */
