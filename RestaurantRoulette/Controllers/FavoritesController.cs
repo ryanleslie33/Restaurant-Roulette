@@ -15,9 +15,14 @@ namespace RestaurantRoulette.Controllers
       List<Favorite> allRestaurantList = new List<Favorite>{ };
       allRestaurantList = foundUser.AllRestaurantSortList();
       int selectedRestListCount = allRestaurantList.Count;
+
+      Console.WriteLine(selectedRestListCount);
+
       int result;
       Random rnd = new Random();
       result = rnd.Next(1, selectedRestListCount);
+
+      Console.WriteLine(result);
 
       model.Add("user", foundUser);
       model.Add("regRollRest", allRestaurantList[result]);
@@ -28,6 +33,7 @@ namespace RestaurantRoulette.Controllers
     [HttpGet("/users/{id}/fav")]
     public ActionResult favRoll(int id)
     {
+      Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allFavoriteList = new List<Favorite>{ };
       allFavoriteList = foundUser.GetUserFavorite();
@@ -35,11 +41,22 @@ namespace RestaurantRoulette.Controllers
       int result;
       Random rnd = new Random();
       result = rnd.Next(1, favoriteRestListCount);
-      return View("show", allFavoriteList[result]);
+      Console.WriteLine(result);
+      Console.WriteLine(favoriteRestListCount);
+      model.Add("user", foundUser);
+      model.Add("favRollRest", allFavoriteList[result]);
+      return View("FavResult", model);
+      //return View("Show", allFavoriteList[result]);
     }
 
     [HttpGet("/users/{id}/favorites/result")]
     public ActionResult Show()
+    {
+      return View();
+    }
+
+    [HttpGet("/users/{id}/favorites/fav-result")]
+    public ActionResult FavResult()
     {
       return View();
     }
