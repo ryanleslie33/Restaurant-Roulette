@@ -15,44 +15,27 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home Page</a>
           </li>
-          <li class="nav-item">
-            <a href="/users/new">Register</a>
-          </li>
-          <li class="nav-item">
-            <a href="/users">Log In</a>
-          </li>
         </ul>
       </div>
     </nav>
   </div>
-    @* <div class="jumbotron jumbotron-fluid">
-      <h1 class="display-4">Restaurant Roulette</h1>
-      <p class="lead">Game To Select Random Restaurant</p>
-      <hr class="my-4">
-      <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
-      <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
-    </div> *@
-    @* <div class="row">
-      <div class="logo">
-        <img class="mainLogo" src="../Images/RestaurantRouletteLogo.png" alt="picture of logo">
-      </div>
-      <div class="card">
-        <img src="../images/personClipArt.png" alt="Avatar" style="width:100%">
-        <h4>User</h4>
-      </div>
-      <div class="inputNotes">
-        <form>
-          <textarea>Some text...</textarea>
-        </form>
-      </div>
-    </div> *@
-    <h4 class="element-align"><strong>User Profile</strong></h4>
-    <p>@Model.GetName()</p>
-    <p>@Model.GetAddress()</p>
-    <p>@Model.GetMenuUrl()</p>
-    <p>@Model.GetPageUrl()</p>
 
-    @* <a href="/users/@Model.GetId()/edit" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
-    <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">All Options</a>
-    <a href="/users/@Model.GetId()/fav" class="btn btn-danger btn-lg" role="button">Fav Options</a> *@
+    <form action="/users/@Model["user"].GetId()/favorites/add" method="post">
+      <input type="hidden" name="name" value="@Model["regRollRest"].GetName()">
+      <input type="hidden" name="address" value="@Model["regRollRest"].GetAddress()">
+      <input type="hidden" name="latitude" value="@Model["regRollRest"].GetLatitude()">
+      <input type="hidden" name="longitude" value="@Model["regRollRest"].GetLongitude()">
+      <input type="hidden" name="cost" value="@Model["regRollRest"].GetCostForTwo()">
+      <input type="hidden" name="cusine" value="@Model["regRollRest"].GetFavCusine()">
+      <input type="hidden" name="menu" value="@Model["regRollRest"].GetMenuUrl()">
+      <input type="hidden" name="page" value="@Model["regRollRest"].GetPageUrl()">
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary">Add To Your Favs!</button>
+    </form>
+    <h4 class="element-align"><strong>User Profile</strong></h4>
+    <p>@Model["regRollRest"].GetName()</p>
+    <p>@Model["regRollRest"].GetAddress()</p>
+    <p>@Model["regRollRest"].GetMenuUrl()</p>
+    <p>@Model["regRollRest"].GetPageUrl()</p>
   </div>

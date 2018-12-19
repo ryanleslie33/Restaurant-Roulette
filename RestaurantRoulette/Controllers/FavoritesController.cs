@@ -10,6 +10,7 @@ namespace RestaurantRoulette.Controllers
     [HttpGet("/users/{id}/regular")]
     public ActionResult Regular(int id)
     {
+      Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allRestaurantList = new List<Favorite>{ };
       allRestaurantList = foundUser.AllRestaurantSortList();
@@ -17,7 +18,11 @@ namespace RestaurantRoulette.Controllers
       int result;
       Random rnd = new Random();
       result = rnd.Next(1, selectedRestListCount);
-      return View("Show", allRestaurantList[result]);
+
+      model.Add("user", foundUser);
+      model.Add("regRollRest", allRestaurantList[result]);
+      return View("Show", model);
+
     }
 
     [HttpGet("/users/{id}/fav")]
@@ -38,13 +43,6 @@ namespace RestaurantRoulette.Controllers
     {
       return View();
     }
-    //
-    // [HttpPost("/users/{id}/add")]
-    // public ActionResult Create(int id)
-    // {
-    //   User foundUser = RestaurantRoulette.Models.User.FindWithUserNameAndPassword(userName, userPassword);
-    //   return View(foundUser);
-    // }
 
   }
 }

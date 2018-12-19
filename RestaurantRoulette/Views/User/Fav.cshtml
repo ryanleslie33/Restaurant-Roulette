@@ -58,5 +58,7 @@
     </div>
   </div>
   <a href="/" class="btn btn-danger btn-lg" role="button">Back to Home Page</a>
-  <a href="/users/@Model["user"].GetId()/regular" class="btn btn-danger btn-lg" role="button">Roll</a>
+  <form action="/users/@Model["user"].GetName()/@Model["user"].GetPassword()" method="post">
+  <button type="submit" class="btn btn-primary">Go Back To Profile</button>
+  </form>
 </div>

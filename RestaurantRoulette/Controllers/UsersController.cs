@@ -61,10 +61,13 @@ namespace RestaurantRoulette.Controllers
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allRestaurantList = foundUser.AllRestaurantSortList();
       List<Marker> foundMarkers = Marker.GetAllRestaurantMarkers(allRestaurantList);
-      return View(foundMarkers);
+      model.Add("user", foundUser);
+      model.Add("markers", foundMarkers);
+      //return View(foundMarkers);
+      return View(model);
     }
 
-    [HttpGet("/users/{id}/fav")]
+    [HttpGet("/users/{id}/favorites-list")]
     public ActionResult Fav(int id)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
@@ -73,6 +76,17 @@ namespace RestaurantRoulette.Controllers
       model.Add("user",  foundUser);
       model.Add("favoriteRestList", allFavRestaurantList);
       return View(model);
+    }
+
+    [HttpPost("/users/{id}/favorites/add")]
+    public ActionResult Add(int id, string name, string address, string menu, string page, double latitude, double longitude, int cost, string cusine)
+    {
+      Favorite newFavorite = new Favorite(name, address, menu, page, latitude, longitude, cost, cusine);
+      newFavorite.Save();
+      User foundUser = RestaurantRoulette.Models.User.Find(id);
+      foundUser.AddFavoriteToUser(newFavorite);
+      return RedirectToAction("Fav");
+
     }
 
   }
