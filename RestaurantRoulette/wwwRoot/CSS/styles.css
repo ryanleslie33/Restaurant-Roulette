@@ -1,3 +1,4 @@
+
 /* css for home page */
 .nav_bar {
   font-style: italic;
@@ -70,15 +71,35 @@ h4 {
   margin-right: 25%;
 }
 
+#map {
+
+  height: 700px;
+  width: 100%;
+}
+
+h3 {
+  color: gold;
+  font-size: 30px;
+  text-align: center;
+}
+
+.roll {
+  margin-left: 50%;
+
+}
 .element-align {
   margin-left: 600px;
 }
 
 .edit_button {
-  margin-left: 45%
+  margin-left: 45%;
 }
 
-
+/* .heading {
+  margin-left: 27%;
+  font-size: 30px;
+  color: gold;
+} */
 
 .registration {
   margin-left: 27%;
@@ -109,8 +130,8 @@ h4 {
   text-align: center;
   color: black;
   margin-top: 25px;
-  margin-left: 75px;
-  margin-right: 75px;
+  margin-left: 16%;
+  /* margin-right: 75px; */
   font-size: 25px;
 }
 
@@ -132,6 +153,8 @@ color: #ECBD32;
 font-size: 16px;
 color: #ECBD32;
 }
+
+
 /* .nav-item{
    border-right: none;
    text-align: center;
@@ -174,6 +197,45 @@ color: #ECBD32;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 
+}
+.heading {
+  text-align: center;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
 }
 /* .wheel {
   position: relative;

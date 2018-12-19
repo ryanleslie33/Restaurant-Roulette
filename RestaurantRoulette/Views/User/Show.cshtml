@@ -11,49 +11,56 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a href="/">Log Out</a>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  <div class="element-align">
-
-  
-  <h4 class=""><strong>User Profile</strong></h4>
-  <p>@Model.GetName()</p>
-  <p>@Model.GetBio()</p>
-  <p>@Model.GetPrice()</p>
-  <p>@Model.GetDistance()</p>
-  <div class="container">
-    <form class="price">
-      <div class="form-group">
-        <label for="formControlRange">Price Range</label>
-        <div class=priceRange>
-          <p>$25 - $100</p>
-        </div>
-
-
-        <input type="range" class="form-control-range" id="formControlRange">
+              <a href="/">Log Out</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="logo">
+            <img class="mainLogo" src="~/Images/RestaurantRouletteLogo.png" alt="picture of logo">
+          </div>
       </div>
-    </form>
-  </div>
-  <div class="container">
-    <form class="price">
-      <div class="form-group">
-        <label for="formControlRange">Distance Range</label>
-        <div class=distanceRange>
-          <p>1 mile - 5 mile</p>
-        </div>
-        <input type="range" class="form-control-range" id="formControlRange">
+      <div class="element-align">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h4><strong>User Profile</strong></h4>
+        <div class="heading">
+          <p>@Model.GetName()</p>
+          <p>@Model.GetBio()</p>
       </div>
-    </form>
-  </div>
-
-
-  <div class="show_buttons">
-    <a href="/users/@Model.GetId()/edit" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
-    <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">All Options</a>
-    <a href="/users/@Model.GetId()/favorites-list" class="btn btn-danger btn-lg" role="button">Fav Options</a>
-  </div>
-  </div>
-</body>
+        <div class="container">
+          <form class="price">
+            <div class="form-group">
+              <label for="formControlRange">Price Range</label>
+              <div class=priceRange>
+                <p>$25 - $100</p>
+              </div>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="200" value="@Model.GetPrice()" class="slider" id="myRange">
+                <h3>@Model.GetPrice()</h3>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="container">
+          <form class="price">
+            <div class="form-group">
+              <label for="formControlRange">Distance Range</label>
+              <div class=distanceRange>
+                <p>1 mile - 5 mile</p>
+              </div>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="10" value="@Model.GetDistance()" class="slider" id="myRange">
+                <h3>@Model.GetDistance()</h3>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="show_buttons">
+          <a href="/users/@Model.GetId()/edit" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
+          <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">All Options</a>
+          <a href="/users/@Model.GetId()/favorites-list" class="btn btn-danger btn-lg" role="button">Fav Options</a>
+        </div>
+      </div>
+    </body>
