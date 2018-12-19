@@ -1,65 +1,63 @@
 @using RestaurantRoulette.Models;
-@{
-  Layout = "_Layout";
-}
-<div class="container">
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Restaurant Roulette</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home Page</a>
-          </li>
-          <li class="nav-item">
-            <a href="/users/new">Register</a>
-          </li>
-          <li class="nav-item">
-            <a href="/users">Log In</a>
-          </li>
-          @* <li class="nav-item">
-          <a href="/users/@Model["user"].GetName()/@Model["user"].GetPassword()">User Details</a>
-        </li> *@
-        </ul>
-      </div>
-    </nav>
-    <div class="jumbotron jumbotron-fluid">
-      <h1 class="display-4">Restaurant Roulette</h1>
-      <p class="lead">Game To Select Random Restaurant</p>
-      <hr class="my-4">
-      <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
-      <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
-    </div>
-    <div class = "parent">
-      <img class= "image1"rc="Images/Wheel.png" alt="">
-      <img class="image2"src="Images/ball.png" alt="">
-      <h4 class="element-align"><strong>User Preferences</strong></h4>
-      <br>
-      @if (@Model.Count == 0)
-      {
-        <p class="element-align"><strong>No Restaurant Matches Your Criteria.</strong></p>
-      }
 
-      <br>
-      <div class="row">
-        @foreach (var rest in Model)
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restaurant Roulette</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+  </style>
+</head>
+<body>
+  <h3>Restaurants within price range and distance.</h3>
+
+  <div id="map"></div>
+  <script>
+
+  function addMarker(latitude, longitude, map)
+  {
+    var latLng = new google.maps.LatLng(latitude, longitude);
+
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      draggable: false
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+      infowindow.open(map, marker);
+    });
+  }
+    function initMap() {
+
+      var epicodus = {lat: 45.520589099999995, lng: -122.6778006};
+
+      var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 14, center: epicodus});
+        var marker1 = new google.maps.Marker({position: epicodus, map: map});
+        var markers;
+        @foreach(var fav in @Model)
         {
-          <div class="col-sm-6">
-          <div class="card">
-          <div class="card-body">
-            <p class="card-title">@rest.GetName()</p>
-            <h5 class="card-title">@rest.GetAddress()</h5>
-            <h5 class="card-title">@rest.GetCostForTwo()</h5>
-            <h5 class="card-title">@rest.GetFavCusine()</h5>
-            <h5 class="card-title">@rest.GetMenuUrl()</h5>
-            <h5 class="card-title">@rest.GetPageUrl()</h5>
-          </div>
-          </div>
-          </div>
+          <text>
+            addMarker(@fav.GetMarkerLatitude(), @fav.GetMarkerLongitude(), map);
+          </text>
         }
-    </div>
-  </div>
-  <a href="/" class="btn btn-danger btn-lg" role="button">Back to Home Page</a>
-  @* <a href="/users/@Model.GetName()/@Model.GetPassword()" class="btn btn-danger btn-lg" role="button">Back to the profile page</a> *@
-  @* <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">Find one restaurant !!</a> *@
+    }
+
+    // Now add markers
+    </script>
+
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCr-hPtZ78DXpBPdJObRUqgBGrCbL7M0lE&callback=initMap">
+    </script>
+    @* <a href="/" class="btn btn-danger btn-lg" role="button">Back to Home Page</a>
+    <a href="/users/@Model["user"].GetId()/regular" class="btn btn-danger btn-lg" role="button">Roll</a> *@
+  </body>
+  </html>
