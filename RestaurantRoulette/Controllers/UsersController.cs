@@ -15,7 +15,7 @@ namespace RestaurantRoulette.Controllers
       return View();
     }
 
-    //Offers Register for New User
+    //Offers Register form for New User
     [HttpGet("/users/new")]
     public ActionResult New()
     {
@@ -73,7 +73,7 @@ namespace RestaurantRoulette.Controllers
       Dictionary<string, object> model = new Dictionary<string, object>();
       User foundUser = RestaurantRoulette.Models.User.Find(id);
       List<Favorite> allFavRestaurantList = foundUser.GetUserFavorite();
-      model.Add("user",  foundUser);
+      model.Add("user", foundUser);
       model.Add("favoriteRestList", allFavRestaurantList);
       return View(model);
     }
