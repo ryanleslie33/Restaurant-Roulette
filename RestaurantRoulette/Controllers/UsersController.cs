@@ -88,6 +88,11 @@ namespace RestaurantRoulette.Controllers
       return RedirectToAction("Fav");
 
     }
+    // [HttpPost("/users/back")]
+    // public ActionResult back()
+    // {
+    // return RedirectToAction("Show");
+    // }
 
   }
 }
