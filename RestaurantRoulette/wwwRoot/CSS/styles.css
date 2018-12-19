@@ -38,28 +38,38 @@ body {
   bottom:25px;
 }
 
+h4 {
+  color: gold;
+  margin-left: 35%;
+}
+
+
 /* css for newUser page */
 
 .mainLogo {
   display: center;
   margin-top: 75px;
-  margin-left: 600px;
-  margin-right: 600px;
+  margin-left: 45%;
+  /* margin-right: 600px; */
   width: 20%;
 }
 
-.form-row {
-  margin-left: 350px;
-  margin-right: inherit;
+.new_form {
+  margin-left: 17%;
+  margin-right: 17%;
 }
+/* .form-row {
+  margin-left: 37%;
+  margin-right: inherit;
+} */
 
 .element-align {
   margin-left: 600px;
 }
 
 .registration {
-  margin-left: 265px;
-  margin-right: 265px;
+  margin-left: 27%;
+  /* margin-right: 265px; */
 }
 
 /* css for user index page  */
