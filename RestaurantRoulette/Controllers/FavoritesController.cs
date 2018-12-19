@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantRoulette.Models;
 using System.Collections.Generic;
 
-namespace RestaurantRoulette.Controllers
-{
   public class FavoriteController : Controller
   {
     [HttpGet("/users/{id}/regular")]
@@ -46,7 +44,6 @@ namespace RestaurantRoulette.Controllers
       model.Add("user", foundUser);
       model.Add("favRollRest", allFavoriteList[result]);
       return View("FavResult", model);
-      //return View("Show", allFavoriteList[result]);
     }
 
     [HttpGet("/users/{id}/favorites/result")]
