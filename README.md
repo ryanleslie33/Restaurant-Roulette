@@ -8,35 +8,35 @@ _Dice description._
 
 ## Specifications
 * _**Create database to store information, and test database to test information.**_
-* _**Create table to hold stylist name and id.**_
-* _**Create table to hold client name, id, and stylist key id.**_
-* _**Create class, constructor, and properties for stylist.**_
-* _**create class, constructor, and properties for client.**_
-* _**Write method to get stylist name.**_
-* _**Write test for get stylist name method.**_
-* _**Write method to get stylist id.**_
-* _**Write test for get stylist id.**_
-* _**Write method to save stylist name, and assign id.**_
-* _**Write method to get stylist name, and id.**_
-* _**Write test to check that stylist GetAll method returns an empty list.**_
-* _**Write test to check that stylist GetAll method returns inputed new objects.**_
-* _**Write test to test stylist save method is operational.**_
-* _**Write stylist Equals method so as to separate primary data table and test data table. (Result in stylist GetAll and Save method tests passing).**_
-* _**Write method to get client name.**_
-* _**Write test for get client name method.**_
-* _**Write method to get client id.**_
-* _**Write test for get client id.**_
-* _**Write method to save client name, and assign id.**_
-* _**Write method to get client name, and id.**_
-* _**Write test to check that client GetAll method returns an empty list.**_
-* _**Write test to check that client GetAll method returns inputed new objects.**_
-* _**Write test to test client save method is operational.**_
-* _**Write client Equals method so as to separate primary data table and test data table. (Result in client GetAll and Save method tests passing).**_
-* _**Write Find method to locate individual stylists based on their unique Id's.**_
+* _**Create table to hold Users name and id.**_
+* _**Create table to hold restaurant name, id, and User key id.**_
+* _**Create class, constructor, and properties for Users.**_
+* _**create class, constructor, and properties for Restaurants.**_
+* _**Write method to get Users name.**_
+* _**Write test for get User name method.**_
+* _**Write method to get User id.**_
+* _**Write test for get User id.**_
+* _**Write method to save User name, and assign id.**_
+* _**Write method to get User name, and id.**_
+* _**Write test to check that User GetAll method returns an empty list.**_
+* _**Write test to check that User GetAll method returns inputed new objects.**_
+* _**Write test to test User save method is operational.**_
+* _**Write User Equals method so as to separate primary data table and test data table. (Result in stylist GetAll and Save method tests passing).**_
+* _**Write method to get Restaurant name.**_
+* _**Write test for get Restaurant name method.**_
+* _**Write method to get Restaurant id.**_
+* _**Write test for get Restaurant id.**_
+* _**Write method to save Restaurant name, and assign id.**_
+* _**Write method to get Restaurant name, and id.**_
+* _**Write test to check that Restaurant GetAll method returns an empty list.**_
+* _**Write test to check that Restaurant GetAll method returns inputed new objects.**_
+* _**Write test to test Restaurant save method is operational.**_
+* _**Write Restaurant Equals method so as to separate primary data table and test data table. (Result in Restaurant GetAll and Save method tests passing).**_
+* _**Write Find method to locate individual Users based on their unique Id's.**_
 * _**Write test for Find method to assert that input and result AreEqual based on the use of the Find Method using a unique Id.**_
-* _**Write a method to return a list of the objects (Clients), associated with Stylists specified unique Id's.**_
-* _**Write test for Get Method, and see that it returns an empty array if no Client is associated with a particular Stylist Id.**_
-* _**Write test for Get Method, and see that it returns Client object list associated with Stylist, based on the Id of stylist, and the id_stylist of client.**_
+* _**Write a method to return a list of the objects (Restaurants), associated with User specified unique Id's.**_
+* _**Write test for Get Method, and see that it returns an empty array if no User is associated with a particular Restaurant Id.**_
+* _**Write test for Get Method, and see that it returns User object list associated with Restaurant, based on the Id of Restaurant, and the id_User of User.**_
 
 
 
