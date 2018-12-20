@@ -3,8 +3,11 @@
 @{
   Layout = "_Layout";
 }
+<body>
+  <div class="logo">
+      <img class="mainLogo" src="~/Images/RestaurantRouletteLogo.png" alt="picture of logo">
+    </div>
 
-<div class="container">
   <div class="nav_bar">
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Restaurant Roulette</a>
@@ -31,10 +34,22 @@
       <input type="hidden" name="page" value="@Model["regRollRest"].GetPageUrl()">
       <br>
       <br>
-      <button type="submit" class="btn btn-primary">Add To Your Favs!</button>
+      <div class="show_fav">
+
+
+      <button type="submit" class="btn btn-outline-warning">Add To Your Favs!</button>
+        </div>
     </form>
-    <h4 class="element-align"><strong>User Profile</strong></h4>
-    <p>@Model["regRollRest"].GetName()</p>
+    <br>
+    @* <div class="user_profile">
+      <div class="element-align">
+<h4 class=""><strong>User Profile</strong></h4>
+      </div> *@
+    </div>
+    <div class="favorite_list">
+
+
+    <p><strong>@Model["regRollRest"].GetName()</strong></p>
     <p>@Model["regRollRest"].GetAddress()</p>
     <p>@Model["regRollRest"].GetMenuUrl()</p>
     <p>@Model["regRollRest"].GetPageUrl()</p>

@@ -1,6 +1,6 @@
 # _Roll The Dice_
 
-#### By _**Tavish OKeefe, Ryan Leslie, **_
+#### By _**Tanvi Garg, Sheila Stephen, Victoria Martinez, Tavish OKeefe, Ryan Leslie, **_
 
 ## Description
 
