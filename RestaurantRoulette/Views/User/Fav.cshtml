@@ -14,18 +14,18 @@
         </ul>
       </div>
     </nav>
-    <div class="jumbotron jumbotron-fluid">
-      <h1 class="display-4">Restaurant Roulette</h1>
-      <p class="lead">Game To Select Random Restaurant</p>
-      <hr class="my-4">
-      <a class="btn btn-primary" href="/users/new" role="button" style="margin-left: 45%">New User</a>
-      <a class="btn btn-primary" href="/users" role="button" style="margin-left: 45%">Log In</a>
-    </div>
+    <br>
+    <br>
     <div class = "parent">
-      <img class= "image1"rc="Images/Wheel.png" alt="">
-      <img class="image2"src="Images/ball.png" alt="">
+      <br>
+      <br>
+      
       <h4 class="element-align"><strong>User's Favorite List</strong></h4>
       <br>
+      <a href="/users/@Model["user"].GetId()/fav" class="btn btn-outline-warning" role="button">Roll</a>
+      <form action="/users/@Model["user"].GetName()/@Model["user"].GetPassword()" method="post">
+        <button type="submit" class="btn btn-outline-warning">Go Back To Profile</button>
+      </form>
       @if (Model["favoriteRestList"].Count == 0)
       {
         <p class="element-align"><strong>No Favorites in your list yet !!</strong></p>
@@ -50,8 +50,4 @@
         }
     </div>
   </div>
-  <a href="/users/@Model["user"].GetId()/fav" class="btn btn-danger btn-lg" role="button">Roll</a>
-  <form action="/users/@Model["user"].GetName()/@Model["user"].GetPassword()" method="post">
-  <button type="submit" class="btn btn-primary">Go Back To Profile</button>
-  </form>
 </div>

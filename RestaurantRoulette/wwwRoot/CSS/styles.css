@@ -26,8 +26,8 @@ body {
 
 .home {
   position:absolute;
-  bottom: 45px;
-  margin-left: 42%;
+  bottom: 40px;
+  margin-left: 45%;
 }
 
 .buttons {
@@ -39,6 +39,11 @@ body {
   bottom:25px;
 }
 
+.show_profile {
+  margin-left: 27%;
+  /* margin-right: 10%; */
+
+}
 h4 {
   color: gold;
   margin-left: 30%;
@@ -95,6 +100,9 @@ h3 {
   margin-left: 45%;
 }
 
+.show_fav {
+  margin-left: 47%;
+}
 /* .heading {
   margin-left: 27%;
   font-size: 30px;
@@ -102,7 +110,7 @@ h3 {
 } */
 
 .registration {
-  margin-left: 27%;
+  margin-left: 5%;
   /* margin-right: 265px; */
 }
 
@@ -118,8 +126,8 @@ h3 {
 /* css for show page  */
 
 .show_buttons {
-  margin-left: 265px;
-  margin-right: 265px;
+  margin-left: 47%;
+
 }
 
 /* .row_range {
@@ -154,7 +162,10 @@ font-size: 16px;
 color: #ECBD32;
 }
 
-
+.favorite_list {
+  color: gold;
+  text-align: center;
+}
 /* .nav-item{
    border-right: none;
    text-align: center;
@@ -190,7 +201,7 @@ color: #ECBD32;
 } */
 
 .wheel{
-  width: 5%;
+  width: 12%;
   height: auto;
     -webkit-animation-name:            rotate;
     -webkit-animation-duration:        2.5s;
@@ -198,8 +209,10 @@ color: #ECBD32;
     -webkit-animation-timing-function: linear;
 
 }
-.heading {
-  text-align: center;
+.heading1 {
+  margin-left: 49%;
+  font-size: 25px;
+  color: gold;
 }
 
 .slidecontainer {

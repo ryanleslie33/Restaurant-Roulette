@@ -19,15 +19,20 @@
             <img class="mainLogo" src="~/Images/RestaurantRouletteLogo.png" alt="picture of logo">
           </div>
       </div>
-      <div class="element-align">
+      @* <div class="element-align"> *@
         <br>
         <br>
         <br>
         <br>
+        @* <div class="show_profile">
+
+
         <h4><strong>User Profile</strong></h4>
-        <div class="heading">
-          <p>@Model.GetName()</p>
-          <p>@Model.GetBio()</p>
+      </div> *@
+
+        <div class="heading1">
+          <p>User Name: @Model.GetName()</p>
+          <p>User Bio: @Model.GetBio()</p>
       </div>
         <div class="container">
           <form class="price">
@@ -58,9 +63,9 @@
           </form>
         </div>
         <div class="show_buttons">
-          <a href="/users/@Model.GetId()/edit" class="btn btn-danger btn-lg" role="button">Edit My Details</a>
-          <a href="/users/@Model.GetId()/all" class="btn btn-danger btn-lg" role="button">All Options</a>
-          <a href="/users/@Model.GetId()/favorites-list" class="btn btn-danger btn-lg" role="button">Fav Options</a>
+          <a href="/users/@Model.GetId()/edit" class="btn btn-outline-warning" role="button">Edit My Details</a>
+          <a href="/users/@Model.GetId()/all" class="btn btn-outline-warning" role="button">All Options</a>
+          <a href="/users/@Model.GetId()/favorites-list" class="btn btn-outline-warning" role="button">Fav Options</a>
         </div>
-      </div>
+      @* </div> *@
     </body>
